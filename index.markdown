@@ -14,7 +14,7 @@ Prior to this I was a staff researcher at UCLA's Ahmanson-Lovelace Brain Mapping
 Some of my current research interests are:
 
 * Deep Learning and applications to high-dimensional signals and images.
-* Inplicit and prior geometric information encoding in neural networks.
+* Implicit and prior geometric information encoding in neural networks.
 * Graph neural networks.
 
 ---
