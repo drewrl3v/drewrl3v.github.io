@@ -2,8 +2,10 @@
 # Feel free to add content and custom Front Matter to this file.
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
-layout: home # home`
+layout: default # home`
 ---
+
+## Andrew Lizarraga
 
 PhD Student in Statistics | Staff Researcher at UCLA's Brain Mapping Center
 
