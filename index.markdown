@@ -5,8 +5,6 @@
 layout: home # home`
 ---
 
-## Andrew Lizarraga
-
 PhD Student in Statistics | Staff Researcher at UCLA's Brain Mapping Center
 
 I'm a first year PhD student at UCLA's Department of Statistics. 
