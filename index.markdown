@@ -5,6 +5,8 @@
 layout: home # home`
 ---
 
+## Andrew Lizarraga
+
 PhD Student in Statistics | Staff Researcher at UCLA's Brain Mapping Center
 
 I'm a first year PhD student at UCLA's Department of Statistics. 
@@ -17,7 +19,7 @@ Some of my current research interests are:
 
 ---
 
-# Publications:
+## Publications:
 
 1. [StreamNet: A WAE for White Matter Streamline Analysis][stream] | [preprint][arxiv_stream] | Code: NA
 
@@ -35,7 +37,7 @@ Some of my current research interests are:
 [srvf]: https://ieeexplore.ieee.org/document/9522855
 [arxiv_srvf]: https://arxiv.org/abs/2104.13449
 
-# Contact:
+## Contact:
 
 andrewlizarraga at ucla.edu
 
