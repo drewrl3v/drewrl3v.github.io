@@ -12,7 +12,7 @@ permalink: "index.html"
 
 PhD Student in Statistics | Staff Researcher at UCLA's Brain Mapping Center
 
-I'm a first year PhD student at UCLA's Department of Statistics. 
+I'm a second year PhD student at UCLA's Department of Statistics & Data science. 
 Prior to this I was a staff researcher at UCLA's Ahmanson-Lovelace Brain Mapping Center.
 Some of my current research interests are:
 
