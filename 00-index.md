@@ -25,4 +25,4 @@ Some of my current research interests are:
 
 andrewlizarraga at ucla.edu
 
-<img src="https://drewrl3v.github.io/animations/trefoil_new.gif" width="200" />
+<img src="https://drewrl3v.github.io/animations/trefoil_new.gif" width="210" />
