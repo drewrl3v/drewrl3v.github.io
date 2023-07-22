@@ -4,6 +4,7 @@ title: Publications
 permalink: /publications/
 ---
 
+
 |1. [SrvfNet: A Generative Network for Unsupervised Multiple Diffeomorphic Functional Alignment][srvf] | [preprint][arxiv_srvf] | Code: NA |
 |2. [Alignment of Tractography Streamlines Using Deformation Transfer via Parallel Transport][align] | [preprint][arxiv_align] | [Code][code_align] |
 |3. [StreamNet: A WAE for White Matter Streamline Analysis][stream] | [preprint][arxiv_stream] | Code: NA |
@@ -17,3 +18,4 @@ permalink: /publications/
 
 [srvf]: https://ieeexplore.ieee.org/document/9522855
 [arxiv_srvf]: https://arxiv.org/abs/2104.13449
+
