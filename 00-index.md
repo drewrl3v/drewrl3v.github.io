@@ -23,4 +23,4 @@ Some of my current research interests are:
 ---
 ## Contact:
 
-**Academic**: andrewlizarraga at g.ucla.edu | **Non-Academic**: drewrl3v at gmail.com
+|**Academic**: andrewlizarraga at g.ucla.edu | **Non-Academic**: drewrl3v at gmail.com|
