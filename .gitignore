@@ -3,3 +3,11 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
+teaching/f23_stats112/*/*.aux
+teaching/f23_stats112/*/*.log
+teaching/f23_stats112/*/*.out
+teaching/f23_stats112/*/*.synctex.gz
+teaching/f23_stats112/*/*.fls
+teaching/f23_stats112/*/*.fdb_latexmk
+teaching/f23_stats112/*/*.ipynb
+teaching/f23_stats112/*/*.tex
