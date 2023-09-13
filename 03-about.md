@@ -4,6 +4,12 @@ title: About
 permalink: /about/
 ---
 
-This is a static site where I loosely keep my thoughts, publications, and other random things.
+⚅This static site hosts my loose thoughts, notes, publications, and a variety of random puzzles.⚁
 
-<img src="https://drewrl3v.github.io/animations/trefoil_new.gif" width="110" />
+```
+  |             |                 |        ___|                           
+  |       _` |  __|   _ \  __ \   __|    \___ \   __ \    _` |   __|   _ \
+  |      (   |  |     __/  |   |  |            |  |   |  (   |  (      __/
+ _____| \__,_| \__| \___| _|  _| \__|    _____/   .__/  \__,_| \___| \___|
+                                                 _|                       
+```

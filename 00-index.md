@@ -4,7 +4,7 @@
 
 layout: default # home`
 #layout: page
-title: Home
+title: Home #Home
 permalink: "index.html"
 ---
 
@@ -12,13 +12,13 @@ permalink: "index.html"
 
 |PhD Student in Statistics | Staff Researcher at UCLA's Brain Mapping Center|
 
-I'm a second year PhD student at UCLA's Department of Statistics & Data science. 
+I'm a second year PhD student at UCLA's Department of Statistics & Data Science. 
 Prior to this I was a staff researcher at UCLA's Ahmanson-Lovelace Brain Mapping Center.
 Some of my current research interests are:
 
 * Deep Learning and applications to high-dimensional signals and images.
-* Latent space regularization techniques.
 * Training amortized samplers for efficient sampling of high dimensional distributions.
+* Latent space regularization techniques.
 
 ---
 ## Contact:
