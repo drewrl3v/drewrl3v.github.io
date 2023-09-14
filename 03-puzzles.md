@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Puzzles ⚅
+title: Puzzles ⚃
 permalink: /puzzles/
 ---
 
