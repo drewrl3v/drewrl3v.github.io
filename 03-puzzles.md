@@ -29,5 +29,9 @@ number of flips until I see a HT?
          ░                       ░                 ░               
 ```
 
-2. I have 12 identical pieces of candy. In how many ways can I distribute the candies to 4 
+1. I have 12 identical pieces of candy. In how many ways can I distribute the candies to 4 
 different kids?
+
+2. San plans to scare twice as many people as Olivia, and Olivia plans to scare three times as many people as Sammy.
+In all they plan to scare at most 2023 people. If no one is scared more than once, at most how many people does
+Olivia plan to scare?
