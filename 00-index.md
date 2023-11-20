@@ -16,7 +16,7 @@ I'm a second year PhD student at UCLA's Department of Statistics & Data Science.
 Prior to this I was a staff researcher at UCLA's Ahmanson-Lovelace Brain Mapping Center.
 Some of my current research interests are:
 
-* Deep Learning and applications to high-dimensional signals and images.
+* Applications of Deep Learning to high-dimensional signals and images.
 * Training amortized samplers for efficient sampling of high dimensional distributions.
 * Latent space regularization techniques.
 
