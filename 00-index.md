@@ -17,11 +17,11 @@ co-advised by Professors [Ying Nian Wu](http://www.stat.ucla.edu/~ywu/) and [Sha
 I perform joint work primarily in the intersection of Deep Learning and Neuroscience. Some high-level research interests of 
 mine are:
 
-* Applications of Deep Learning to high-dimensional signals and images.
-* Training amortized samplers for efficient sampling of high dimensional distributions.
+* Applications of Deep Learning to high-dimensional signals and images
+* Training amortized samplers for efficient sampling of high dimensional distributions
 * Representation Learning
 * Generative Modeling
-* Latent space regularization techniques.
+* Latent space regularization techniques
 
 ---
 ## Contact:
