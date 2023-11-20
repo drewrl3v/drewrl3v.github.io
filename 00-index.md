@@ -12,12 +12,15 @@ permalink: "index.html"
 
 |PhD Student in Statistics | Staff Researcher at UCLA's Brain Mapping Center|
 
-I'm a second year PhD student at UCLA's Department of Statistics & Data Science. 
-Prior to this I was a staff researcher at UCLA's Ahmanson-Lovelace Brain Mapping Center.
-Some of my current research interests are:
+I'm a second-year PhD student in the Department of Statistics & Data Science at UCLA, where I'm currently
+co-advised by Professors [Ying Nian Wu](http://www.stat.ucla.edu/~ywu/) and [Shantanu H. Joshi](http://sjoshi.bmap.ucla.edu/). 
+I perform joint work primarily in the intersection of Deep Learning and Neuroscience. Some high-level research interests of 
+mine are:
 
 * Applications of Deep Learning to high-dimensional signals and images.
 * Training amortized samplers for efficient sampling of high dimensional distributions.
+* Representation Learning
+* Generative Modeling
 * Latent space regularization techniques.
 
 ---
