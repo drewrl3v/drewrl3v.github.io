@@ -14,3 +14,10 @@ number of flips until I see a HT?
 
 I have 12 identical pieces of candy. In how many ways can I distribute the candies to 4 
 different kids?
+
+**November 2023:**
+
+A man in a gallery is asked about a portrait depicting a man with an object obscuring his face.
+He responds, 'Brothers and sisters I have none, but that man's father is my father's son.'
+
+What is the object obscuring the face of the man in the portrait?
