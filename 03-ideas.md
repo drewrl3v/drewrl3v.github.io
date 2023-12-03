@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Ideas ⚄
+title: Ideas ⚃
 permalink: /ideas/
 ---
 
