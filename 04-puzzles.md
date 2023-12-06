@@ -23,3 +23,7 @@ A man in a gallery is asked about a portrait depicting a man with an object obsc
 He responds, 'Brothers and sisters I have none, but that man's father is my father's son.'
 
 What is the object obscuring the face of the man in the portrait?
+
+**December 2023:**
+Take a circle and draw two chords at random on the circle. What's the probability tha the two 
+chords intersect?
