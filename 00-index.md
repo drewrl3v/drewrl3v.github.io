@@ -21,7 +21,7 @@ mine are:
 * Training amortized samplers for efficient sampling of high dimensional distributions
 * Representation Learning
 * Generative Modeling
-* Latent space regularization technique s
+* Latent space regularization techniques
 
 ---
 ## Contact:
