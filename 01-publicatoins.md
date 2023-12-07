@@ -5,7 +5,8 @@ permalink: /publications/
 ---
 
 |Paper|Preprint|Code|
-|Differentiable VQ-VAE's for Robust White Matter Streamline Encodings (Submitted to ISBI 2024)| [arXiv][diff_vq] | [Code][code_diff_vq] |
+|SDSRA: A Skill-Driven Skill-Recombination Algorithm for Efficient Policy Learning | [arXiv][arxiv_sdsra] | [Code][code_sdsra] |
+|Differentiable VQ-VAE's for Robust White Matter Streamline Encodings | [arXiv][arxiv_diff_vq] | [Code][code_diff_vq] |
 |[StreamNet: A WAE for White Matter Streamline Analysis][stream] | [arXiv][arxiv_stream] | NA |
 |[Alignment of Tractography Streamlines Using Deformation Transfer via Parallel Transport][align] | [arXiv][arxiv_align] | [Code][code_align] |
 |[SrvfNet: A Generative Network for Unsupervised Multiple Diffeomorphic Functional Alignment][srvf] | [arXiv][arxiv_srvf] | NA |
@@ -20,5 +21,8 @@ permalink: /publications/
 [srvf]: https://ieeexplore.ieee.org/document/9522855
 [arxiv_srvf]: https://arxiv.org/abs/2104.13449
 
-[diff_vq]: https://arxiv.org/abs/2311.06212
+[arxiv_diff_vq]: https://arxiv.org/abs/2311.06212
 [code_diff_vq]: https://github.com/drewrl3v/diff-vq-vae
+
+[arxiv_sdsra]: https://arxiv.org/abs/2312.03216
+[code_sdsra]: https://github.com/ericjiang18/SDSRA/
