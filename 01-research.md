@@ -1,15 +1,23 @@
 ---
 layout: page
-title: Publications ⚁
-permalink: /publications/
+title: Research ⚁
+permalink: /research/
 ---
 
 |Paper|Preprint|Code|
 |SDSRA: A Skill-Driven Skill-Recombination Algorithm for Efficient Policy Learning | [arXiv][arxiv_sdsra] | [Code][code_sdsra] |
 |Differentiable VQ-VAE's for Robust White Matter Streamline Encodings | [arXiv][arxiv_diff_vq] | [Code][code_diff_vq] |
+|<img src="../imgs/origin_vs_recon_all.png" width="300"/>| <img src="../imgs/Perturb_MCP_2.png" width="700"/>|
 |[StreamNet: A WAE for White Matter Streamline Analysis][stream] | [arXiv][arxiv_stream] | NA |
+|<img src="../imgs/streamnet_bundles.png" width="300"/>| <img src="../imgs/streamnet_whole.png" width="1000"/>|
 |[Alignment of Tractography Streamlines Using Deformation Transfer via Parallel Transport][align] | [arXiv][arxiv_align] | [Code][code_align] |
+|<img src="../imgs/align_par.png" width="300"/>| <img src="../imgs/align_reg.png" width="300"/>|
 |[SrvfNet: A Generative Network for Unsupervised Multiple Diffeomorphic Functional Alignment][srvf] | [arXiv][arxiv_srvf] | NA |
+|<img src="../imgs/warp_bump.png" width="300"/>| <img src="../imgs/warp_bundle.png" width="400"/>|
+
+
+
+
 
 [align]: https://link.springer.com/chapter/10.1007/978-3-030-87615-9_9
 [arxiv_align]: https://arxiv.org/abs/2108.03697
