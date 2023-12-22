@@ -4,11 +4,11 @@
 
 layout: default # home`
 #layout: page
-title: Home ⚀ #Home
+title: Home
 permalink: "index.html"
 ---
 
-# Andrew Lizarraga ⚀
+# Andrew Lizarraga
 
 |PhD Student in Statistics | Staff Researcher at UCLA's Brain Mapping Center|
 
