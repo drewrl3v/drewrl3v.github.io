@@ -30,3 +30,11 @@ chords intersect?
 
 **January 2024:**
 What is the probability that three uniformly random points on a circle will be contained in some semicircle?
+
+**February 2024:**
+I have assigned two uniformly distributed random numbers from -1000 to 1000 on two slips of paper and turn them face down.
+
+You are allowed to turn the first slip over and examine the value. If you believe it's the larger of the two values, you keep
+the slip of paper. If not, you keep the second slip of paper. You win if you get the larger of the two values.
+
+Is it possible to come up with a strategy that let's you win more than 50% of the time?
