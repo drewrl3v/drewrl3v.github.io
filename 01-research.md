@@ -5,8 +5,10 @@ permalink: /research/
 ---
 
 |Paper|Preprint|Code|
+| Latent Plan Transformer: Planning as Latent Variable Inference | [arXiv][latent_plan]  | NA |
+|<img src="../imgs/latent_plan.png" width="900"/>| <img src="../imgs/latent_plan2.png" width="300"/>|
 |SDSRA: A Skill-Driven Skill-Recombination Algorithm for Efficient Policy Learning | [arXiv][arxiv_sdsra] | [Code][code_sdsra] |
-|Differentiable VQ-VAE's for Robust White Matter Streamline encodings | [arxiv][arxiv_diff_vq] | [code][code_diff_vq] |
+|Differentiable VQ-VAE's for Robust White Matter Streamline encodings | [arXiv][arxiv_diff_vq] | [code][code_diff_vq] |
 |<img src="../imgs/origin_vs_recon_all.png" width="900"/>| <img src="../imgs/Perturb_MCP_2.png" width="300"/>|
 |[StreamNet: A WAE for White Matter Streamline Analysis][stream] | [arXiv][arxiv_stream] | NA |
 |<img src="../imgs/streamnet_bundles.png" width="300"/>| <img src="../imgs/streamnet_whole.png" width="1250"/>|
@@ -34,3 +36,5 @@ permalink: /research/
 
 [arxiv_sdsra]: https://arxiv.org/abs/2312.03216
 [code_sdsra]: https://github.com/ericjiang18/SDSRA/
+
+[latent_plan]: https://arxiv.org/abs/2402.04647
