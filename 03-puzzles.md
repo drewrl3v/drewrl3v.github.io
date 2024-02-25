@@ -25,7 +25,7 @@ He responds, 'Brothers and sisters I have none, but that man's father is my fath
 What is the object obscuring the face of the man in the portrait?
 
 **December 2023:**
-Take a circle and draw two chords at random on the circle. What's the probability tha the two 
+Take a circle and draw two chords at random on the circle. What's the probability that the two 
 chords intersect?
 
 **January 2024:**
