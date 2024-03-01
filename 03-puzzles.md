@@ -38,3 +38,15 @@ You are allowed to turn the first slip over and examine the value. If you believ
 the slip of paper. If not, you keep the second slip of paper. You win if you get the larger of the two values.
 
 Is it possible to come up with a strategy that let's you win more than 50% of the time?
+
+**March 2024:**
+The Game of Pig:
+
+You start with a score of 0 and roll a fair 6 sided dice. 
+
+* If you roll a 2,3,4,5 or 6, add this number to your current score. 
+* If you roll a 1, you go bust and lose the game.
+* You can choose to stop rolling at any time and keep your score.
+
+A common strategy in this push-your-luck dice game is to choose a goal score `s`, where you 
+stop rolling if you get `s` or more points. What is the optimal choice of `s`?
