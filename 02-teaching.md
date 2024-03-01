@@ -4,4 +4,4 @@ title: Teaching
 permalink: /teaching/
 ---
 
-|**Nothing Yet (I will likely teach in Fall 2024)**|
+|**Nothing Yet (I will be a TA for Summer 2024)**|
