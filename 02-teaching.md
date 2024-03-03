@@ -4,4 +4,4 @@ title: Teaching
 permalink: /teaching/
 ---
 
-|**Nothing Yet (I will be a TA for Summer 2024)**|
+|**UCLA STATS 100A Summer 2024**|
