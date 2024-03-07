@@ -7,6 +7,8 @@ permalink: /research/
 |Paper|Preprint|Code|
 | Latent Plan Transformer: Planning as Latent Variable Inference | [arXiv][latent_plan]  | NA |
 |<img src="../imgs/latent_plan.png" width="900"/>| <img src="../imgs/latent_plan2.png" width="300"/>|
+| Improved BOLD Detection With Sliced Inverse Regression | [bioRxiv][bold] | [code][bold_code] |
+|<img src="../imgs/glm_fdr.png" width="900"/>| <img src="../imgs/sir_fdr.png" width="285"/>|
 |SDSRA: A Skill-Driven Skill-Recombination Algorithm for Efficient Policy Learning | [arXiv][arxiv_sdsra] | [code][code_sdsra] |
 |Differentiable VQ-VAE's for Robust White Matter Streamline Encodings | [arXiv][arxiv_diff_vq] | [code][code_diff_vq] |
 |<img src="../imgs/origin_vs_recon_all.png" width="900"/>| <img src="../imgs/Perturb_MCP_2.png" width="300"/>|
@@ -38,3 +40,6 @@ permalink: /research/
 [code_sdsra]: https://github.com/ericjiang18/SDSRA/
 
 [latent_plan]: https://arxiv.org/abs/2402.04647
+
+[bold]: https://www.biorxiv.org/content/10.1101/2024.02.21.581434v1.abstract
+[bold_code]: https://github.com/drewrl3v/fmri-sir
