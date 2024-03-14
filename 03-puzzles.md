@@ -50,3 +50,7 @@ You start with a score of 0 and roll a fair 6 sided dice.
 
 A common strategy in this push-your-luck dice game is to choose a goal score `s`, where you 
 stop rolling if you get `s` or more points. What is the optimal choice of `s`?
+
+**Pi Day 2024:**
+
+Download the puzzles [here](../pi_day/2024.pdf). Enjoy!
