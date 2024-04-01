@@ -54,3 +54,10 @@ stop rolling if you get `s` or more points. What is the optimal choice of `s`?
 **Pi Day 2024:**
 
 Download the puzzles [here](../pi_day/2024.pdf). Enjoy!
+
+**April 2024:**
+I have two coins. One is fair, the other is biased towards heads. You are allowed only two flips and then must guess which coin is biased.
+What strategy increases your odds of determining which coin is biased?:
+
+1. Pick one of the coins and then flip it twice.
+2. Flip each coin once.
