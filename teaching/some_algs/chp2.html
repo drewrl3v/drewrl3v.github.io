@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>chp1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>chp2</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14594,124 +14594,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr />
-<h1 id="Inductive-Reasoning">Inductive Reasoning<a class="anchor-link" href="#Inductive-Reasoning">&#182;</a></h1><hr />
-<p><a href="../../index.html">Home</a></p>
-<p><a href="./chp0.html">Previous Section: Some Algorithms</a> | <a href="./chp2.html">Next Section: Recursion</a></p>
+<h1 id="Recursion">Recursion<a class="anchor-link" href="#Recursion">&#182;</a></h1><p><a href="../../index.html">Home</a></p>
+<p><a href="./chp1.html">Previous Section: Inductive Reasoning</a> | Next Section: TBD</p>
 <hr />
-<p>Some (but not all) algorithms can be intuitively reasoned via induction. I've noticed this connection is usually not directly addressed.</p>
-<p>So let's review it before proceeding with the standard Data Structures and Algorithms.</p>
-<h2 id="Warning:">Warning:<a class="anchor-link" href="#Warning:">&#182;</a></h2><p>If you're new to this, the induction section will feel like being blasted with a firehose. This might be unpleasant, so here are my suggestions:</p>
-<ol>
-<li><p>Just understand the high-level concepts. The <code>Recursion</code>, section that proceeds this one has much simpler examples and will ease you into the following sections.</p>
-</li>
-<li><p>Don't get bogged down in the notation, just try to understand the overall concept:</p>
-</li>
-</ol>
-<p>For example, if I asked you what is the integer between 1 and 100? Just say 50.</p>
-<p>If I ask whats $423/1658$? Just say it's about $400/1600 = 4/16 = 1/4$.</p>
-<p>If I ask how many times can you divide $100$ by $2$. Just say $100/2 = 50$, then $50/2 = 25$, $25/2$ is about $24/2 = 12$, then $12/2 = 6$, $6/2 = 3$ and $3/2$ is about $1$.</p>
-<p>So you can divide $100$ by $2$ about $7$ times.</p>
-<ol start="3">
-<li><p>Again, don't get caught in the details, try your best to absorb the general idea.</p>
-</li>
-<li><p>Mathematically, induction is typically setup recursively and naturally this leads to recursive implementation of an inductive algorithm. However we will also provide iterative versions of the recursive algorithm, when possible.</p>
-</li>
-</ol>
-
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Let's-Begin">Let's Begin<a class="anchor-link" href="#Let's-Begin">&#182;</a></h2><p>There are many forms of induction, but we will turn our attention to a few forms and mention others forms as
-we go through this notebook.</p>
-<p>We let $T$ denote a mathematical statement</p>
-<p><code>Standard Induction:</code></p>
-<p><strong>Base Case:</strong>  $T$ holds for $n=1$</p>
-<p><strong>Inductive Hypothesis:</strong> Assume $T$ holds for $n-1$, where $n &gt; 1$.</p>
-<p><strong>What you want to prove:</strong> We want to show that the inductive hypothesis implies that $T$ holds for $n$</p>
-<p><code>Example:</code></p>
-<p>$T$ is the statement that $1 + 2 + \dots + n = \frac{n(n+1)}{2}$.</p>
-<p>Let's check the base case: $n=1$. Notice that simple algebra reveals that $\frac{1(1+1)}{2} = 1$. So the base case is satisfied.</p>
-<p>Now for the inductive step. Assume that $T$ holds for $n &gt; 1$, and consider the following sum:</p>
-<p>$1 + 2 + \dots + n + (n+1)$. Notice that we can express this as:</p>
-<p>$(1 + 2 + \dots + n) + (n+1)$. Now by the inductive hypothesis, we have that the expression
-is equivalent to:</p>
-<p>$\frac{n(n+1)}{2} + (n+1)$</p>
-<p>$=\frac{(n+1)(n+2)}{2}$ as desired.</p>
-<p>--</p>
-<p><code>Strong Induction:</code></p>
-<p><strong>Base Case(s):</strong> $T$ holds for $n = 1, 2, 3, \dots, n_0$</p>
-<p><strong>Inductive Hypothesis:</strong> Assume $T$ holds for all $k$ such that $n_0 &lt; k \leq n-1$</p>
-<p><strong>What you want to prove:</strong> We want to show that the inductive hypothesis implies that $T$ holds for $n$</p>
-<p>We won't prove anything here, but we demonstrate a familiar recurrence that requires more than a single base case:</p>
-<p>The fibonacci numbers are given by: $0,1,1,2,3,5,8,13,\dots$</p>
-<p>Which can be expressed via the following recurrence-relation:</p>
-<p>$f_0 = 0, f_1 = 1$ can be thought of the base cases and to generate the $n$-th fibonacci number we use:
-$f_n = f_{n-1} + f_{n-2}$</p>
-<p>--</p>
-<p><code>Divide and Conquer Induction:</code></p>
-<p><strong>Base Case</strong> $T$ holds for $n=1$</p>
-<p><strong>Inductive Hypothesis:</strong> $T$ holds for $n//2$ with $n &gt; 1$. (Note: $n//2$ is defined to be $n/2$ rounded down to the nearest integers.)</p>
-<p><strong>What you want to prove:</strong> We want to show that the inductive hypothesis implies that $T$ holds for $n$</p>
-<p>Let's consider powers of $2$. For example computing: $2^3$, $2^8$, ect.</p>
-<p>As you may recall, the exponent informs the reader how many times they must multiply 2 times itself, so naturally you would think that to compute</p>
-<p>$2^8$ that this would require $8$ multiplications. However we can be clever with a Divide-and-Conquer approach:</p>
-<p>Let $T$ be the statement that $2^n$ can be computed by knowing how to compute $2^{n//2}$ (and may need an extra multiplication by $2$)</p>
-<p>Consider $2^n$. The base case for us will be $n=1$, in which case $2^1 = 2 \times 1 = 2 \times (2^0 \times 2^0) = 2 \times (2^{1//2} \times 2^{1//2})$.</p>
-<p>Now assume we know how to compute $2^n$ given $n//2$ for $n&gt;1$. Now we consider
-$2^{n+1}$. Notice that this is equivalent to:</p>
-<p>$2^1 \times 2^n$, then by the induction hypothesis, we know how to compute 2^n based on knowing how to compute $2^{n//2}$
-(i.e. $2^n = 2^{n//2} \times 2^{n//2}$).</p>
-<p>So we just multiply $2^n$ by $2$ to show that $T$ holds for $n+1$ which proves the statement.</p>
-<p>What is interesting about this approach is that it suggests that we only need $\log_2(n)$ multiplications to compute the power of 2.</p>
-<p>For example, notice that $2^8$, can be computed as follows $2 \times 2 = 4$, then $4 \times 4 = 16$, then $16 \times 16 = 256 = 2^8$.
-So we only used $3$ multiplications instead of $8$</p>
-
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<hr />
-<h2 id="Simple-Algorithms-Constructed-via-Inductive-Reasoning">Simple Algorithms Constructed via Inductive Reasoning<a class="anchor-link" href="#Simple-Algorithms-Constructed-via-Inductive-Reasoning">&#182;</a></h2><hr />
-<p>The purpose of this entire notebook is to demonstrate how and when inductive reasoning can assist in
-developing an algorithm.</p>
-<p>We will be explicit about our notion of inductive reasoning in the beginning of this notebook, but as
-we become familiar with the technique, we use it as an implicit tool.</p>
-<p>Psychologically there are some problems while inductive in nature, may be more intuitive to just dive 
-into the problem.</p>
-<p>So we may outright skip inductive reasoning all together.</p>
-
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Summing-a-List-of-Numbers">Summing a List of Numbers<a class="anchor-link" href="#Summing-a-List-of-Numbers">&#182;</a></h2><p>We aim to create an algorithm called <code>sum(nums)</code>, which takes a list <code>nums</code> as input and returns 
-the sum of the elements in the list.</p>
-<p><code>1. Standard Induction:</code></p>
-<p>We induct on the length of the list, $n$.</p>
-<p><strong>Base Case:</strong> If $n=1$, then return the element in the list, i.e. nums[0].</p>
-<p><strong>Induction Hypothesis:</strong> We assume we know how to sum a list of length $n-1$.</p>
-<p>Notice that sum(nums) is equal to the sum of the list from indices $0$ to $n-2$ and the last index $n-1$.</p>
-<p>sum(nums[0:n-1]) + nums[n-1]</p>
-<p>By the inductive hypothesis we know how to find sum(nums[0:n-1]), so we are done.</p>
 
 </div>
 </div>
@@ -14724,149 +14609,44 @@ the sum of the elements in the list.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Recursive Implementation</span>
-<span class="k">def</span> <span class="nf">rec_sum1</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums_len</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">nums_len</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Factorial-(Linear-Recursive)">Factorial (Linear Recursive)<a class="anchor-link" href="#Factorial-(Linear-Recursive)">&#182;</a></h2><p>Write a recursive function for the factorial function. You may assume that the input <code>n</code> is greater or equal to <code>0</code>.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">rec_factorial</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">rec_sum1</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums_len</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">nums_len</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">rec_factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">rec_sum1</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Iterative Implementation</span>
-<span class="k">def</span> <span class="nf">iter_sum1</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-        <span class="n">res</span> <span class="o">+=</span> <span class="n">num</span>
-    <span class="k">return</span> <span class="n">res</span>
-
-<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">iter_sum1</span><span class="p">(</span><span class="n">nums</span><span class="p">))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><code>2. Strong Induction:</code></p>
-<p>It's not really relevant in this case.</p>
-<p><strong>Base Case:</strong> If $n=1$ return nums[0], if $n=2$, return nums[0] + nums[1]</p>
-<p><strong>Inductive Hypothesis:</strong> Suppose we can compute sum(nums) for nums_len $ \leq n-2$</p>
-<p>Consider nums_len = n, then sum(nums, nums_len) = sum(nums, nums_len-2) + nums[nums_len-1] + nums[nums_len-2]</p>
-
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">rec_sum2</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums_len</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">nums_len</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="n">nums_len</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">rec_sum2</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums_len</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">nums_len</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">nums_len</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">rec_sum2</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">iter_sum2</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-    <span class="n">nums_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="n">nums_len</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">nums_len</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">+=</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">nums_len</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">nums_len</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
-            <span class="n">nums_len</span> <span class="o">-=</span> <span class="mi">2</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">+=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">nums_len</span> <span class="o">-=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">res</span>
-
-<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">iter_sum2</span><span class="p">(</span><span class="n">nums</span><span class="p">))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><code>3. Divide and Conquer Induction</code></p>
-<p><strong>Base Case:</strong> If $n=1$, then we return nums[0]</p>
-<p><strong>Inductive Hypothesis:</strong> We know how to sum a list of length $n//2$</p>
-<p>Now consider:</p>
-<p>sum(nums) = sum(nums[0:n//2]) + sum([n//2+1:n-1])</p>
-
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">rec_sum3</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">low</span> <span class="o">==</span> <span class="n">high</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">low</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">mid</span> <span class="o">=</span> <span class="n">low</span> <span class="o">+</span> <span class="p">(</span><span class="n">high</span> <span class="o">-</span> <span class="n">low</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-        <span class="k">return</span> <span class="n">rec_sum3</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span> <span class="o">+</span> <span class="n">rec_sum3</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
-
-<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span>
-    <span class="n">rec_sum3</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">rec_factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+    <span class="n">rec_factorial</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">rec_factorial</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -14875,6 +14655,18 @@ the sum of the elements in the list.</p>
 </div>
 </div>
 
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Factorial-(Linear-Iterative)">Factorial (Linear Iterative)<a class="anchor-link" href="#Factorial-(Linear-Iterative)">&#182;</a></h2><p>Write an iterative version of the factorial function.</p>
+
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14883,25 +14675,1331 @@ the sum of the elements in the list.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">iter_sum3</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-    <span class="n">stack</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
-    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">iter_factorial</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">*=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">res</span>
 
-    <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
-        <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">low</span> <span class="o">==</span> <span class="n">high</span><span class="p">:</span>
-            <span class="n">total</span> <span class="o">+=</span> <span class="n">nums</span><span class="p">[</span><span class="n">low</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">iter_factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+    <span class="n">iter_factorial</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">iter_factorial</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Length-of-List-(Linear-Recursive)">Length of List (Linear Recursive)<a class="anchor-link" href="#Length-of-List-(Linear-Recursive)">&#182;</a></h2><p>Write a recursive function that computes the length of a list.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">rec_length</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">nums</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">rec_length</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">rec_length</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Length-of-List-(Linear-Iterative)">Length of List (Linear Iterative)<a class="anchor-link" href="#Length-of-List-(Linear-Iterative)">&#182;</a></h2><p>Write an iterative function that computes the length of a list.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">iter_length</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">res</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iter_length</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Multiply-Two-Positive-Integers-(Linear-Recursive)">Multiply Two Positive Integers (Linear Recursive)<a class="anchor-link" href="#Multiply-Two-Positive-Integers-(Linear-Recursive)">&#182;</a></h2><p>Given two positive integers, implement a recursive function that computes their product.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="c1"># Assume both integers are positive</span>
+<span class="k">def</span> <span class="nf">recur_mul</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">recur_mul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">recur_mul</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Multiply-Two-Positive-Integers-(Linear-Iterative)">Multiply Two Positive Integers (Linear Iterative)<a class="anchor-link" href="#Multiply-Two-Positive-Integers-(Linear-Iterative)">&#182;</a></h2><p>Given two positive integers, implement an iterative function that computes their product.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">iter_mul</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">iter_mul</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Reversing-a-Sequence-(Linear-Recursive)">Reversing a Sequence (Linear Recursive)<a class="anchor-link" href="#Reversing-a-Sequence-(Linear-Recursive)">&#182;</a></h2><p>Write a recursive function that takes in a list of integers, <code>nums</code>, and reverses the list.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">recur_reverse</span><span class="p">(</span><span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">left</span> <span class="o">==</span> <span class="n">right</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">right</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">recur_reverse</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">left</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">recur_reverse</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Reversing-a-Sequence-(Linear-Iterative)">Reversing a Sequence (Linear Iterative)<a class="anchor-link" href="#Reversing-a-Sequence-(Linear-Iterative)">&#182;</a></h2><p>Write an iterative function that takes in a list of integers, <code>nums</code>, and reverses the list.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">iter_reverse</span><span class="p">(</span><span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">:</span>
+        <span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">right</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span>
+        <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">iter_reverse</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Base-Two-Integer-Log-(Log-Recursive)">Base-Two Integer-Log (Log Recursive)<a class="anchor-link" href="#Base-Two-Integer-Log-(Log-Recursive)">&#182;</a></h2><p>Write a recursive function that computes the base 2 log of an integers.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">recur_base2_log</span><span class="p">(</span><span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">recur_base2_log</span><span class="p">(</span><span class="n">num</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">recur_base2_log</span><span class="p">(</span><span class="mi">23</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Base-Two-Integer-Log-(Log-Iterative)">Base-Two Integer-Log (Log Iterative)<a class="anchor-link" href="#Base-Two-Integer-Log-(Log-Iterative)">&#182;</a></h2><p>Write an iterative function that computes the base 2 log of an integer.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">iter_base2_log</span><span class="p">(</span><span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">//</span> <span class="mi">2</span>
+    
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">iter_base2_log</span><span class="p">(</span><span class="mi">23</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Determine-if-Palindrome-(Linear-Recursive)">Determine if Palindrome (Linear Recursive)<a class="anchor-link" href="#Determine-if-Palindrome-(Linear-Recursive)">&#182;</a></h2><p>Implement a recursive function to determine if a string is a palindrome or not.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">recur_is_palindrome</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">right</span> <span class="o">==</span> <span class="n">left</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">!=</span> <span class="n">word</span><span class="p">[</span><span class="n">right</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">mid</span> <span class="o">=</span> <span class="n">low</span> <span class="o">+</span> <span class="p">(</span><span class="n">high</span> <span class="o">-</span> <span class="n">low</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">low</span><span class="p">,</span> <span class="n">mid</span><span class="p">))</span>
-            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">recur_is_palindrome</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">left</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;racecar&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">recur_is_palindrome</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;love&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">recur_is_palindrome</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Determine-if-Palindrome-(Linear-Iterative)">Determine if Palindrome (Linear Iterative)<a class="anchor-link" href="#Determine-if-Palindrome-(Linear-Iterative)">&#182;</a></h2><p>Implement an iterative function to determine if a string is a palindrome or not.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">iter_is_palindrome</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">==</span> <span class="n">word</span><span class="p">[</span><span class="n">right</span><span class="p">]:</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;racecar&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iter_is_palindrome</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;love&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iter_is_palindrome</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Consonants-And-Vowels-(Linear-Recursive)">Consonants And Vowels (Linear Recursive)<a class="anchor-link" href="#Consonants-And-Vowels-(Linear-Recursive)">&#182;</a></h2><p>Determine if a string has more vowels than consonants.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="n">vowels</span> <span class="o">=</span><span class="s1">&#39;aeiou&#39;</span>
+<span class="k">def</span> <span class="nf">recur_more_vowels</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">vow_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">con_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">vow_count</span> <span class="o">&gt;</span> <span class="n">con_count</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">recur_more_vowels</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">vow_count</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">con_count</span><span class="p">,</span> <span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">recur_more_vowels</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">vow_count</span><span class="p">,</span> <span class="n">con_count</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">recur_more_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">recur_more_vowels</span><span class="p">(</span><span class="s2">&quot;eeei&quot;</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Consonants-And-Vowels-(Linear-Iterative)">Consonants And Vowels (Linear Iterative)<a class="anchor-link" href="#Consonants-And-Vowels-(Linear-Iterative)">&#182;</a></h2><p>Determine if a string has more vowels than consonants.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="n">vowels</span> <span class="o">=</span><span class="s1">&#39;aeiou&#39;</span>
+<span class="k">def</span> <span class="nf">iter_more_vowels</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">vow_count</span><span class="p">,</span> <span class="n">con_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">:</span>
+            <span class="n">vow_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">con_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="k">return</span> <span class="n">vow_count</span> <span class="o">&gt;</span> <span class="n">con_count</span>
+
+<span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iter_more_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iter_more_vowels</span><span class="p">(</span><span class="s2">&quot;eeei&quot;</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Even-Before-Odd-(Recursive)">Even Before Odd (Recursive)<a class="anchor-link" href="#Even-Before-Odd-(Recursive)">&#182;</a></h2><p>Write a recursive function that rearranges a sequence of integer values so that all the even values appear before all the odd values.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">1,2,3</span>
+<span class="sd">l r</span>
+<span class="sd">2,1,3</span>
+<span class="sd">--------</span>
+<span class="sd">1,3,2,4</span>
+<span class="sd">l r   </span>
+<span class="sd">l   r</span>
+<span class="sd">2,3,1,4</span>
+<span class="sd">  l r  </span>
+<span class="sd">  l   r</span>
+<span class="sd">2,4,1,3</span>
+<span class="sd">--------</span>
+<span class="sd">2,3,4,5</span>
+<span class="sd">l r</span>
+<span class="sd">  l r</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="k">def</span> <span class="nf">recur_even_before_odd</span><span class="p">(</span><span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">l</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="k">return</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
+            <span class="n">recur_even_before_odd</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">recur_even_before_odd</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">recur_even_before_odd</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># both are even, move on</span>
+            <span class="n">recur_even_before_odd</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">recur_even_before_odd</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">recur_even_before_odd</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">nums</span>
+<span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Even-Before-Odd-(Iterative)">Even Before Odd (Iterative)<a class="anchor-link" href="#Even-Before-Odd-(Iterative)">&#182;</a></h2><p>Write an iterative function that rearranges a sequence of integer values so that all the even values appear before all the odd values.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">iter_even_before_odd</span><span class="p">(</span><span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">r</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
+            <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">r</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">r</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">r</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">iter_even_before_odd</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">iter_even_before_odd</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">nums</span>
+<span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Smaller-Than-K-(Recursive)">Smaller Than K (Recursive)<a class="anchor-link" href="#Smaller-Than-K-(Recursive)">&#182;</a></h2><p>Given an unsorted list of integers, <code>nums</code>, and an integer <code>k</code>. Write a recursive function that rearranges the elements of <code>nums</code> so that all elements less than or equal to <code>k</code> come before any element larger than <code>k</code>.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">k = 3</span>
+<span class="sd">1,2,3,3,1,0,-3,5</span>
+<span class="sd">l r</span>
+<span class="sd">1,2,3,3,1,0,-3,5</span>
+<span class="sd">  l r</span>
+<span class="sd">1,2,3,3,1,0,-3,5</span>
+<span class="sd">    l r </span>
+<span class="sd">1,2,3,3,1,0,-3,5</span>
+<span class="sd">      l r</span>
+<span class="sd">1,2,3,1,3,0,-3,5   </span>
+<span class="sd">1,2,1,3,3,0,-3,5</span>
+<span class="sd">1,1,2,3,3,0,-3,5</span>
+<span class="sd">        l r</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="k">def</span> <span class="nf">partition</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+    <span class="n">pivot</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">end</span><span class="p">]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">start</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">pivot</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">end</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">recur_smaller_than_k</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">start</span> <span class="o">&gt;=</span> <span class="n">end</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="n">pivot_index</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+    <span class="n">recur_smaller_than_k</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">pivot_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">recur_smaller_than_k</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">pivot_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">recur_smaller_than_k</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Smaller-Than-K-(Iterative)">Smaller Than K (Iterative)<a class="anchor-link" href="#Smaller-Than-K-(Iterative)">&#182;</a></h2><p>Given an unsorted list of integers, <code>nums</code>, and an integer <code>k</code>. Write an iterative function that rearranges the elements of <code>nums</code> so that all elements less than or equal to <code>k</code> come before any element larger than <code>k</code>.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">partition</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+    <span class="n">pivot</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">end</span><span class="p">]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">start</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">pivot</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">end</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">iter_smaller_than_k</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="c1"># Use a stack to replace the recursive calls</span>
+    <span class="n">stack</span> <span class="o">=</span> <span class="p">[(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)]</span>
+
+    <span class="c1"># Process the stack until it&#39;s empty</span>
+    <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>  <span class="c1"># Get the current start and end indices</span>
+
+        <span class="k">if</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">:</span>
+            <span class="n">pivot_index</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+            <span class="c1"># Instead of calling the function recursively, push the indices onto the stack</span>
+            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">start</span><span class="p">,</span> <span class="n">pivot_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">pivot_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
+
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iter_smaller_than_k</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Minimum-(Linear-Recursive)">Minimum (Linear Recursive)<a class="anchor-link" href="#Minimum-(Linear-Recursive)">&#182;</a></h2><p>Write a recursive function to compute the minimum of a list of integers.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">recur_min</span><span class="p">(</span><span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">right_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">right_index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">right_index</span><span class="p">]</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cur_min</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">right_index</span><span class="p">]</span>
+        <span class="n">other_min</span> <span class="o">=</span> <span class="n">recur_min</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">right_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">cur_min</span> <span class="o">&lt;</span> <span class="n">other_min</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cur_min</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">other_min</span>
+
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">recur_min</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Minimum-(Linear-Iterative)">Minimum (Linear Iterative)<a class="anchor-link" href="#Minimum-(Linear-Iterative)">&#182;</a></h2><p>Write an iterative function to compute the minimum of a list of integers.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">iter_min</span><span class="p">(</span><span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">cur_min</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="n">cur_min</span><span class="p">:</span>
+            <span class="n">cur_min</span> <span class="o">=</span> <span class="n">num</span>
+    
+    <span class="k">return</span> <span class="n">cur_min</span>
+
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iter_min</span><span class="p">(</span><span class="n">nums</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Maximum-(Linear-Recursive)">Maximum (Linear Recursive)<a class="anchor-link" href="#Maximum-(Linear-Recursive)">&#182;</a></h2><p>Write a recursive function that computes the maximum of a list of integers.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">recur_max</span><span class="p">(</span><span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">right_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">right_index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">right_index</span><span class="p">]</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cur_max</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">right_index</span><span class="p">]</span>
+        <span class="n">other_max</span> <span class="o">=</span> <span class="n">recur_max</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">right_index</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">cur_max</span> <span class="o">&gt;</span> <span class="n">other_max</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cur_max</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">other_max</span>
+
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">recur_max</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Maximum-(Linear-Iterative)">Maximum (Linear Iterative)<a class="anchor-link" href="#Maximum-(Linear-Iterative)">&#182;</a></h2><p>Write an iterative function that computes the maximum of a list of integers.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">iter_max</span><span class="p">(</span><span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">cur_max</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;=</span> <span class="n">cur_max</span><span class="p">:</span>
+            <span class="n">cur_max</span> <span class="o">=</span> <span class="n">num</span>
+    
+    <span class="k">return</span> <span class="n">cur_max</span>
+
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iter_max</span><span class="p">(</span><span class="n">nums</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Powers-(Linear-Recursive)">Powers (Linear Recursive)<a class="anchor-link" href="#Powers-(Linear-Recursive)">&#182;</a></h2><p>Write a recursive function that computes a number to the power, <code>n</code>, an integer.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">lin_recur_power</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">num</span> <span class="o">*</span> <span class="n">lin_recur_power</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">lin_recur_power</span><span class="p">(</span><span class="mf">3.1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="mf">3.1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Powers-(Linear-Iterative)">Powers (Linear Iterative)<a class="anchor-link" href="#Powers-(Linear-Iterative)">&#182;</a></h2><p>Write an iterative function that computes a number to the power, <code>n</code>, an integer.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">iter_power</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">*=</span> <span class="n">num</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">iter_power</span><span class="p">(</span><span class="mf">3.1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Powers-(Log-Recursive-i.e.-Repeated-Squaring)">Powers (Log Recursive i.e. Repeated Squaring)<a class="anchor-link" href="#Powers-(Log-Recursive-i.e.-Repeated-Squaring)">&#182;</a></h2><p>Write a recursive function that computes a number to the power, <code>n</code>, in <code>log(n)</code> multiplications</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">recur_squaring_power</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">partial</span> <span class="o">=</span> <span class="n">recur_squaring_power</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">partial</span> <span class="o">*</span> <span class="n">partial</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">*=</span> <span class="n">num</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">recur_squaring_power</span><span class="p">(</span><span class="mf">3.1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Powers-(Log-Iterative)">Powers (Log Iterative)<a class="anchor-link" href="#Powers-(Log-Iterative)">&#182;</a></h2><p>Write an iterative function that computes a number to the power, <code>n</code>, in <code>log(n)</code> multiplications.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">iter_squaring_power</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">num</span> <span class="o">*=</span> <span class="n">num</span>
+        
+        <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">res</span> <span class="o">*=</span> <span class="n">num</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+            
+<span class="nb">print</span><span class="p">(</span><span class="n">iter_squaring_power</span><span class="p">(</span><span class="mf">3.1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="English-Ruler-(A-Fractal)-(Exponential-Recursive)">English Ruler (A Fractal) (Exponential Recursive)<a class="anchor-link" href="#English-Ruler-(A-Fractal)-(Exponential-Recursive)">&#182;</a></h2><ol>
+<li>For each inch, we place a major tick with a numerical label. We denote the length of the tick designating a whole</li>
+</ol>
+<p>inch as a major tick</p>
+<ol start="2">
+<li>Between the marks for whole inches, the ruler contains a series of minor ticks, place at intervals of</li>
+</ol>
+<p>1/2 inch, 1/4 inch, and so on.</p>
+<ol start="3">
+<li>As the size of the interval decreases by half, the tick length decreases by one.</li>
+</ol>
+<p>In general an interval with a central tick length of $L \geq 1$ is composed of:</p>
+<ol>
+<li>An interval with a central tick of length $L- 1$.</li>
+<li>A single tick of length $L$.</li>
+<li>An interval with a central tick of length $L -1$.</li>
+</ol>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="c1"># First we write a function to produce the minor ticks around the major tick</span>
+<span class="k">def</span> <span class="nf">draw_interval</span><span class="p">(</span><span class="n">L</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">L</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">draw_interval</span><span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="n">L</span><span class="p">)</span>
+        <span class="n">draw_interval</span><span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">draw_interval</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="c1"># Now we implement drawing the entire ruler</span>
+<span class="k">def</span> <span class="nf">draw_ruler</span><span class="p">(</span><span class="n">num_inches</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">major_tick</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_inches</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="n">major_tick</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">draw_interval</span><span class="p">(</span><span class="n">major_tick</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="n">major_tick</span><span class="p">,</span> <span class="n">num_inches</span><span class="p">)</span>
+
+<span class="n">draw_ruler</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#####&#39;</span><span class="p">)</span>
+<span class="n">draw_ruler</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Binary-Search-(Log-Recursive)">Binary Search (Log Recursive)<a class="anchor-link" href="#Binary-Search-(Log-Recursive)">&#182;</a></h2><p>Given an ordered list of integers, <code>nums</code>, and given an <code>item</code> we are searching for in the array, return the index of the array that the <code>item</code> is located.</p>
+<p>Otherwise, return <code>-1</code>.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">rec_binary_search</span><span class="p">(</span><span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">item</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    nums := a sorted array of integers</span>
+<span class="sd">    left := starting index of nums</span>
+<span class="sd">    right := ending index of nums</span>
+<span class="sd">    item := the integer we are seeking in nums</span>
+
+<span class="sd">    returns the index of the element if found, otherwise -1</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">if</span> <span class="n">left</span> <span class="o">&gt;</span> <span class="n">right</span><span class="p">:</span> <span class="c1"># Note that we could have wrapped everything below with a while statement</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mid</span>
+
+    <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">item</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">rec_binary_search</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">item</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">rec_binary_search</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">mid</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">nums1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">99</span><span class="p">]</span>
+<span class="n">nums2</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">rec_binary_search</span><span class="p">(</span><span class="n">nums1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">rec_binary_search</span><span class="p">(</span><span class="n">nums2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">rec_binary_search</span><span class="p">(</span><span class="n">nums2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">rec_binary_search</span><span class="p">(</span><span class="n">nums2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">rec_binary_search</span><span class="p">(</span><span class="n">nums2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Binary-Search-(Log-Iterative)">Binary Search (Log Iterative)<a class="anchor-link" href="#Binary-Search-(Log-Iterative)">&#182;</a></h2><p>Implement an iterative version of the Binary Search algorithm.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">iter_binary_search</span><span class="p">(</span><span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">item</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">mid</span>
+        
+        <span class="k">elif</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">item</span><span class="p">:</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="n">nums1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">99</span><span class="p">]</span>
+<span class="n">nums2</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span>
+   <span class="n">iter_binary_search</span><span class="p">(</span><span class="n">nums1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+   <span class="n">iter_binary_search</span><span class="p">(</span><span class="n">nums2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+   <span class="n">iter_binary_search</span><span class="p">(</span><span class="n">nums2</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+   <span class="n">iter_binary_search</span><span class="p">(</span><span class="n">nums2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+   <span class="n">iter_binary_search</span><span class="p">(</span><span class="n">nums2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="File-System-(Exponential-Recursive)">File System (Exponential Recursive)<a class="anchor-link" href="#File-System-(Exponential-Recursive)">&#182;</a></h2><p>We consider  computing total disk usage for all files and directories nested within a 
+particular directory.</p>
+<p>The <strong>cumulative</strong> disk space for an entry can be computed with a simple recursive algorithm.
+It is equal to the immediate disk space used by the entry plus the sum of the <strong>cumulative</strong>
+disk space usage of any entries that are stored directly within the entry.</p>
+<p>The Algorithm:</p>
+<h3 id=""><a class="anchor-link" href="#">&#182;</a></h3><pre><code>DiskUsage(path):
+Input: A string designating a path to a file-system entry
+Output: The cumulative disk space used by that entry and any nested entries
+
+total = size(path)
+if path represents a directory then
+    for each child entry stored within the directory path do
+        total = total + DiskUsage(child)
+return total
+
+</code></pre>
+<p>Python's os Module:</p>
+<h3 id=""><a class="anchor-link" href="#">&#182;</a></h3><p>To provide a Python implementation of a recursive algorithm for computing disk usage, we rely on Python's os module, 
+which provides robust tools for interacting with the operating system during the execution of a program.</p>
+<p>This is an extensive library, but we only need the following four functions for our purposes:</p>
+<ol>
+<li><p>os.path.getsize(path) --&gt; return the immediate disk usage (measured in bytes) for the file or directory
+that is identified by the string path</p>
+</li>
+<li><p>os.paht.isdir(path) --&gt; Return True if entry designated by string path is a directory; False otherwise</p>
+</li>
+<li><p>os.listdir(path) --&gt; return a list of strings that are the names of all entries within a directory
+designated by a string path</p>
+</li>
+<li><p>os.path.join(path, filename) --&gt; Compose the path string and filename string using an appropriate operating
+system separator between the two ( / for Unix/Linux and \ for Windows). Return the string that represents
+the full path to the file.</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">os</span> 
+
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./example_files/&#39;</span>
+
+<span class="k">def</span> <span class="nf">disk_usage</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    return the number of bytes used by a file/folder and any descendants</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">childpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">disk_usage</span><span class="p">(</span><span class="n">childpath</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">total</span>
 
-<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">disk_usage</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Fibonacci-(Exponential-Recursive)">Fibonacci (Exponential Recursive)<a class="anchor-link" href="#Fibonacci-(Exponential-Recursive)">&#182;</a></h2><p>Below is a recursive approach to compute Fibonacci Numbers.</p>
+<p>Notice that we return two function calls every time $n &gt; 1$.</p>
+<p>So if $n$ is big, then upon first calling the function we make $2$ function calls. Then those functions make $2$ function calls each (now there is $2^2$ call so far).</p>
+<p>Inuctively, we see there will be $2^n$ function calls. Since the function is recursive, these calls go in memory in a call stack and $2^n$ grows very quickly.</p>
+<p>So this is not ideal.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">rec1_fib</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">rec1_fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">rec1_fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
 <span class="nb">print</span><span class="p">(</span>
-    <span class="n">iter_sum3</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-<span class="p">)</span>
+    <span class="n">rec1_fib</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">rec1_fib</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+    <span class="n">rec1_fib</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+    <span class="n">rec1_fib</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span>
+    <span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14916,52 +16014,8 @@ the sum of the elements in the list.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Sorting-a-List">Sorting a List<a class="anchor-link" href="#Sorting-a-List">&#182;</a></h2>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><code>1. Standard Induction</code></p>
-<p><strong>Base Case:</strong> If $n=1$, then just return the list (it is already sorted).</p>
-<p><strong>Inductive Hypothesis:</strong> Assume we know how to sort a list of length $&lt; n$.</p>
-<p>Now we consider: sort(nums[0:n]) = sort(nums[0:n-1]) ??? nums[n-1].</p>
-<p>So we know how to sort a list of length $n-1$. But we then have to do something with the $n$ th element and
-the sorted list of $n-1$ numbers.</p>
-<p>The most intuitive thing I can think of is that we must insert this element into the sorted list.</p>
-<p>So the ??? should be some kind of insert function.</p>
-<p>But how do we insert? We need to create an algorithm for it!</p>
-
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Insert-Function">Insert Function<a class="anchor-link" href="#Insert-Function">&#182;</a></h2><p><code>Structured Induction</code></p>
-<p><strong>Base Case:</strong></p>
-<p>If <code>nums</code> is empty then there is nothing to insert, so we are done.</p>
-<p>If <code>nums</code> is not empty but the last element is greater than the second to last, then trivially the last element is inserted in the correct spot.</p>
-<p><strong>Inductive Hypothesis:</strong></p>
-<p>Given a sorted list <code>nums</code> where the first $n-1$ are sorted and the $n$ th number is less than the $n+1$ number,
-we know how to insert it into its correct spot.</p>
-<p>Consider a list of $n+1$ numbers where the fist $n$ are sorted and the $n+1$ number is less than $n$.</p>
-<p>First, let's swap the $n+1$ th and the $n$ th number.</p>
-<p>Now we can insert the the $n+1$ th number into the sorted sublist of the $n-1$ numbers by the inductive hypothesis, so we are done.</p>
-<p>Basically we performed the following operations</p>
-<p>Given nums[0:n+1], swap the values between nums[n] and nums[n+1], then apply the insert function on nums[0:n]. 
-Remember that nums[0:n] was already sorted in the first place, so nums[n] was the largest element.</p>
-<p>We assumed that nums[n+1] &lt; nums[n] (otherwise we'd have our base case and we'd be done), so with swap between the
-elements still preserves order.</p>
+<h2 id="Fibonacci-(Linear-Recursive-Memoization)">Fibonacci (Linear Recursive Memoization)<a class="anchor-link" href="#Fibonacci-(Linear-Recursive-Memoization)">&#182;</a></h2><p>Notice that we can store computed results, so we don't need to recompute them again.</p>
+<p>This approach is often known as memoization.</p>
 
 </div>
 </div>
@@ -14974,23 +16028,25 @@ elements still preserves order.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">insert_into</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    n := the length of the list num</span>
-<span class="sd">    nums := the list of numbers to be sorted</span>
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">rec2_fib</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 
-<span class="sd">    Inserts the last element of the sublist nums[0..n] into its correct position</span>
-<span class="sd">    so that nums[0..n] is sorted</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="c1"># Base case: If the list is empty or already sorted</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="k">return</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span> <span class="c1"># we know what these values are</span>
 
-    <span class="c1"># Swap the last two elements if they are out of order</span>
-    <span class="n">nums</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span> <span class="c1"># if we computed this value before, just return it</span>
+            <span class="k">return</span> <span class="n">seen</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># otherwise we need to compute it</span>
+            <span class="n">seen</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">seen</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-    <span class="c1"># Recursive call for the remaining list</span>
-    <span class="n">insert_into</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">rec2_fib</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">rec2_fib</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+    <span class="n">rec2_fib</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+    <span class="n">rec2_fib</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span>
+    <span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15005,8 +16061,8 @@ elements still preserves order.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Return-to-Sorting-a-List">Return to Sorting a List<a class="anchor-link" href="#Return-to-Sorting-a-List">&#182;</a></h2><p>Now with our insert function, we can sort the list by following the base case
-and the inductive hypothesis from earlier.</p>
+<h2 id="Fibonacci-(Linear-Recursive-Accumulator)">Fibonacci (Linear Recursive Accumulator)<a class="anchor-link" href="#Fibonacci-(Linear-Recursive-Accumulator)">&#182;</a></h2><p>Yet another approach, is to note that in order to compute the next fibonacci number we only need to know the result of the previous sum of fibonacci numbers.</p>
+<p>So we may pass this result instead of storing it or needing to store a bunch of computed values.</p>
 
 </div>
 </div>
@@ -15019,26 +16075,23 @@ and the inductive hypothesis from earlier.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">insertion_sort</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Sorts nums[0..high] using recursive insertion sort</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="c1"># Base case: If the list has one or no elements</span>
-    <span class="k">if</span> <span class="n">high</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span>
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">rec3_fib</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 
-    <span class="c1"># Sort the first high-1 elements</span>
-    <span class="n">insertion_sort</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">high</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">f_n2</span><span class="p">,</span> <span class="n">f_n1</span><span class="p">)</span> <span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">f_n2</span> <span class="o">+</span> <span class="n">f_n1</span><span class="p">,</span> <span class="n">f_n2</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="c1"># Insert the high-th element into its correct position in the sorted array</span>
-    <span class="n">insert_into</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">high</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># Test the function</span>
-<span class="n">nums2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
-<span class="n">nums2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original list:&quot;</span><span class="p">,</span> <span class="n">nums2</span><span class="p">)</span>
-<span class="n">insertion_sort</span><span class="p">(</span><span class="n">nums2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sorted list:&quot;</span><span class="p">,</span> <span class="n">nums2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">rec3_fib</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">rec3_fib</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+    <span class="n">rec3_fib</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+    <span class="n">rec3_fib</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span>
+    <span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15053,9 +16106,8 @@ and the inductive hypothesis from earlier.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>I provided a recursive version of the insertion sort algorithm. However, below is the iterative version.</p>
-<p>You may notice some resemblance when you peer into the iterative algorithm, notice that the while loop is behaving as if we call the insert function many times until the number is in the right spot.</p>
-<p>It may take some getting used to, but if you follow the logic, you'll realize that it behaves identically to the recursive function.</p>
+<h2 id="Fibonacci-(Linear-Iterative)">Fibonacci (Linear Iterative)<a class="anchor-link" href="#Fibonacci-(Linear-Iterative)">&#182;</a></h2><p>Of course, we can just note that the next fibonacci number is just the sum of the previous two.</p>
+<p>So we only need sentinels to store teh previous two numbers and forget the rest.</p>
 
 </div>
 </div>
@@ -15068,29 +16120,21 @@ and the inductive hypothesis from earlier.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">insertion_sort</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Sorts an array using iterative insertion sort.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="c1"># Iterate over the entire array</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">iter_fib</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 
-        <span class="c1"># Move elements of nums[0..i-1], that are greater than key,</span>
-        <span class="c1"># to one position ahead of their current position</span>
-        <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="k">while</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-            <span class="n">nums</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="n">fn1</span><span class="p">,</span> <span class="n">fn2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 
-        <span class="c1"># Insert the key at after the element just smaller than it</span>
-        <span class="n">nums</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="n">fn1</span><span class="p">,</span> <span class="n">fn2</span> <span class="o">=</span> <span class="n">fn2</span><span class="p">,</span> <span class="n">fn1</span> <span class="o">+</span> <span class="n">fn2</span>
 
-<span class="c1"># Test the function</span>
-<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original list:&quot;</span><span class="p">,</span> <span class="n">nums</span><span class="p">)</span>
-<span class="n">insertion_sort</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sorted list:&quot;</span><span class="p">,</span> <span class="n">nums</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fn1</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">iter_fib</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">iter_fib</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+    <span class="n">iter_fib</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+    <span class="n">iter_fib</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span>
+    <span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15105,12 +16149,104 @@ and the inductive hypothesis from earlier.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>As a quick note, if you change the form of induction you will obtain a different sorting algorithm.</p>
-<p>For example, if you apply divide-and-conquer induction, you get what is known as the <code>merge sort</code>.</p>
-<p>We cover this algorithm later, but hopefully you'll sense these patterns and when they apply as well as when they don't.</p>
+<h2 id="Towers-of-Hanoi-(Exponential-Recursive)">Towers of Hanoi (Exponential Recursive)<a class="anchor-link" href="#Towers-of-Hanoi-(Exponential-Recursive)">&#182;</a></h2><p>We are given a platform with three pegs, <code>A</code>, <code>B</code>, <code>C</code>. On peg <code>A</code> is <code>n</code> disks.</p>
+<p>The largest disk is at the bottom and the smallest is at the top. (from largest to smallest)</p>
+<p>The puzzle is to move all the disks from <code>A</code> to <code>C</code>.</p>
+<ol>
+<li>You may move a disk from one peg to any other peg, provided that the disk is smaller than the current disk on the peg.</li>
+<li>If the peg has no disks, then any disk can be placed there.</li>
+</ol>
+<p>Write a function that prints the sequence of moves you should make in order to solve this puzzle.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">tower</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">aux</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Move Disk </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">dest</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tower</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">aux</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Move disk </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">dest</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">tower</span><span class="p">(</span><span class="n">aux</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">tower</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Towers-of-Hanoi-(Exponential-Iterative)">Towers of Hanoi (Exponential Iterative)<a class="anchor-link" href="#Towers-of-Hanoi-(Exponential-Iterative)">&#182;</a></h2><p><code>Note:</code> This is our first example where can't simply convert the recursive example into an iterative one using a loop.</p>
+<p>It's a fundamentally different problem, and requires a more sophisticated approach. In particular we need to use a <code>stack</code>.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">tower</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">aux</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="c1"># Note the bool at the end indicate if we have processed the stack and still need to keep iterating with it</span>
+    <span class="n">stack</span> <span class="o">=</span> <span class="p">[(</span><span class="n">source</span><span class="p">,</span> <span class="n">aux</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="kc">False</span><span class="p">)]</span>
+
+    <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+        <span class="n">source</span><span class="p">,</span> <span class="n">aux</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">processed</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Move Disk </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">dest</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">processed</span><span class="p">:</span>
+                <span class="c1"># Push the current problem back onto the stack</span>
+                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">source</span><span class="p">,</span> <span class="n">aux</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
+                
+                <span class="c1"># Push subproblem for moving n-1 disks from source to aux</span>
+                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">source</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">aux</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Move Disk </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">dest</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Push subproblem for moving n-1 disks from aux to dest</span>
+                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">aux</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+
+<span class="n">tower</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr />
 <p><a href="../../index.html">Home</a></p>
-<p><a href="./chp0.html">Previous Section: Some Algorithms</a> | <a href="./chp2.html">Next Section: Recursion</a></p>
+<p><a href="./chp1.html">Previous Section: Inductive Reasoning</a> | Next Section: TBD</p>
 <hr />
 
 </div>
