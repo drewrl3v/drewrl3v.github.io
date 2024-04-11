@@ -4,7 +4,8 @@ layout: page
 permalink: /teaching/spr24_stats100a/
 ---
 
-# Stats 100A (Spring 2024)
+**Stats 100A (Spring 2024)**
+
 
 [Slides](slides.pdf)
 
