@@ -9,6 +9,4 @@ permalink: /teaching/spr24_stats100a/
 
 [Slides](slides.pdf)
 
-[Lec1 Code](./andrew_lec1.zip)
-
-[Lec2 Code](./andrew_lec2.zip)
+[Lec1 Code](./new_lec1.zip)
