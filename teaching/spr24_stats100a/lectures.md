@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 #title: Stats 100A (Spring 2024)
 permalink: /teaching/spr24_stats100a/
 ---
