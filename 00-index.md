@@ -20,8 +20,8 @@ mine are:
 
 * Representation Learning
 * Generative Modeling
-* Diffusion and Flow Models
-* LLMs
+* Quantized Models
+* Inference
 
 ---
 ## Contact:
