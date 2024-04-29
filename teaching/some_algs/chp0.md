@@ -21,7 +21,7 @@ permalink: teaching/some_algs/chp0/
 
 2. I emphasize and inductive approach early on, but merely use it as an initial guide and I will diverge from inductive reasoning when presented with problems where it's more intuitive to do so. 
 
-3. I assume you have at the very minimum have seen induction and have some exposure to programming.
+3. I assume you have exposure to programming, but would like another resource for algorithms.
 
 4. This notebook will go through a variety of problems from summing a list of numbers all the way to the Huffman Compression Algorithm.
 
