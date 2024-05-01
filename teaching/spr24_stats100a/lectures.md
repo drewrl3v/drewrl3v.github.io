@@ -10,4 +10,4 @@ permalink: /teaching/spr24_stats100a/
 
 [Slides (With Additional Material)](./slides.pdf)
 
-[Lec1 Code](./new_lec1.zip)
+[Code Snippets](./new_lec1.zip)
