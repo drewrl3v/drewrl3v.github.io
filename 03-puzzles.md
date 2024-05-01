@@ -61,3 +61,8 @@ What strategy increases your odds of determining which coin is biased?:
 
 1. Pick one of the coins and then flip it twice.
 2. Flip each coin once.
+
+**May 2024:**
+I have a convex pentagon with a total perimeter of size 1. I then line the floor with parallel
+lines each spaced 1 unit apart from each other. I then toss the pentagon like a coin. What is 
+the probability that it intersects a line?
