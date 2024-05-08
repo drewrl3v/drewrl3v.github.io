@@ -14949,7 +14949,7 @@ The answer and all the intermediate calculations can be represented in a 32-bit 
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Alternative Solution</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 <span class="kn">import</span> <span class="nn">operator</span>
-<span class="k">def</span> <span class="nf">eval_RPN</span><span class="p">(</span><span class="n">tokens</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">eval_rpn</span><span class="p">(</span><span class="n">tokens</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="n">ops</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;+&#39;</span><span class="p">:</span><span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">sub</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span><span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span><span class="n">operator</span><span class="o">.</span><span class="n">truediv</span><span class="p">}</span>
     <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
@@ -14966,9 +14966,9 @@ The answer and all the intermediate calculations can be represented in a 32-bit 
             <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">tok</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">res</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">eval_RPN</span><span class="p">([</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;+&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="s2">&quot;*&quot;</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">eval_RPN</span><span class="p">([</span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="s2">&quot;13&quot;</span><span class="p">,</span><span class="s2">&quot;5&quot;</span><span class="p">,</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="s2">&quot;+&quot;</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">eval_RPN</span><span class="p">([</span><span class="s2">&quot;10&quot;</span><span class="p">,</span><span class="s2">&quot;6&quot;</span><span class="p">,</span><span class="s2">&quot;9&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="s2">&quot;+&quot;</span><span class="p">,</span><span class="s2">&quot;-11&quot;</span><span class="p">,</span><span class="s2">&quot;*&quot;</span><span class="p">,</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="s2">&quot;*&quot;</span><span class="p">,</span><span class="s2">&quot;17&quot;</span><span class="p">,</span><span class="s2">&quot;+&quot;</span><span class="p">,</span><span class="s2">&quot;5&quot;</span><span class="p">,</span><span class="s2">&quot;+&quot;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">eval_rpn</span><span class="p">([</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;+&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="s2">&quot;*&quot;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">eval_rpn</span><span class="p">([</span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="s2">&quot;13&quot;</span><span class="p">,</span><span class="s2">&quot;5&quot;</span><span class="p">,</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="s2">&quot;+&quot;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">eval_rpn</span><span class="p">([</span><span class="s2">&quot;10&quot;</span><span class="p">,</span><span class="s2">&quot;6&quot;</span><span class="p">,</span><span class="s2">&quot;9&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="s2">&quot;+&quot;</span><span class="p">,</span><span class="s2">&quot;-11&quot;</span><span class="p">,</span><span class="s2">&quot;*&quot;</span><span class="p">,</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="s2">&quot;*&quot;</span><span class="p">,</span><span class="s2">&quot;17&quot;</span><span class="p">,</span><span class="s2">&quot;+&quot;</span><span class="p">,</span><span class="s2">&quot;5&quot;</span><span class="p">,</span><span class="s2">&quot;+&quot;</span><span class="p">]))</span>
 </pre></div>
 
      </div>
@@ -15170,102 +15170,6 @@ It can be shown that the resulting string will always be unique.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Daily-Temperatures:">Daily Temperatures:<a class="anchor-link" href="#Daily-Temperatures:">&#182;</a></h2><p>Given an array of integers <strong>temperatures</strong> represents the daily temperatures, return an array <strong>answer</strong>
-such that <strong>answer[i]</strong> is the number of days you have to wait after the <strong>i-th</strong> day to get a warmer temperature.</p>
-<p>If there is no future day for which this is possible, keep <strong>answer[i] == 0</strong> instead</p>
-
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">[73,74,75,71,69,72,76,73]</span>
-
-<span class="sd">The trick here is to look at the subproblem of a monotonic decreasing stack.</span>
-<span class="sd">Basically if the next temperature is less than the previous, we append to the stack</span>
-<span class="sd">Once we come across a temperature bigger than the previous, we keep popping from the stack and</span>
-<span class="sd">count the number of pops until we get to a previous value that&#39;s larger than the current one</span>
-<span class="sd">&#39;&#39;&#39;</span>
-
-<span class="k">def</span>  <span class="nf">daily_temperatures</span><span class="p">(</span><span class="n">temperatures</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">temperatures</span><span class="p">)</span>
-    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># [temp, index]</span>
-
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">temp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">temperatures</span><span class="p">):</span>
-        <span class="k">while</span> <span class="n">stack</span> <span class="ow">and</span> <span class="n">temp</span> <span class="o">&gt;</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span> <span class="c1"># check if stack is empty and check if temp is greater than what we appended to stack</span>
-            <span class="n">_</span><span class="p">,</span> <span class="n">stack_index</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-            <span class="n">res</span><span class="p">[</span><span class="n">stack_index</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">stack_index</span><span class="p">)</span> <span class="c1"># number of days</span>
-        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">temp</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
-
-    <span class="k">return</span> <span class="n">res</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">daily_temperatures</span><span class="p">([</span><span class="mi">73</span><span class="p">,</span><span class="mi">74</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">71</span><span class="p">,</span><span class="mi">69</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">76</span><span class="p">,</span><span class="mi">73</span><span class="p">]))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Car-Fleet:">Car Fleet:<a class="anchor-link" href="#Car-Fleet:">&#182;</a></h2><p>There are <strong>n</strong> cars going to the same destination along a one-lane road. The destination is <strong>target</strong> miles away.
-You are given two integer arrays <strong>position</strong> and <strong>speed</strong>, both of length <strong>n</strong>, where <strong>position[i]</strong> is the position
-of the <strong>i-th</strong> car and <strong>speed[i]</strong> is the speed of the <strong>i-th</strong> car (in mile per hour)</p>
-<p>A car can never pass another car ahead of it, but it can catch up to it and drive bumper to bumper <strong>at the same speed</strong>.
-The faster car will <strong>slow down</strong> to match the slower car's speed. The distance between these two cars is ignored
-(i.e., they are assumed to have the same position).</p>
-<p>A <strong>car fleet</strong> is some non-empty set of cars driving at the same position and same speed. Note that a single car is also
-a car fleet.</p>
-<p>If a car catches up to a car fleet right at the destination point, it will still be considered as one car fleet.</p>
-<p>Return the number of car fleets that will arrive at the destination.</p>
-
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">carFleet</span><span class="p">(</span><span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">speed</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="n">pair</span> <span class="o">=</span> <span class="p">[(</span><span class="n">p</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">speed</span><span class="p">)]</span>
-    <span class="n">pair</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">pair</span><span class="p">:</span>  <span class="c1"># Reverse Sorted Order</span>
-        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">target</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">/</span> <span class="n">s</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]:</span>
-            <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Implementing-an-ArrayStack">Implementing an ArrayStack<a class="anchor-link" href="#Implementing-an-ArrayStack">&#182;</a></h2><p>This is cheating, but a good intro to Python Classes</p>
 
 </div>
@@ -15396,7 +15300,6 @@ a car fleet.</p>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">MinStack</span><span class="p">:</span>
-
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">min_record</span> <span class="o">=</span> <span class="p">[]</span>
