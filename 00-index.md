@@ -21,7 +21,6 @@ mine are:
 * Representation Learning
 * Generative Modeling
 * Quantized Models
-* Inference
 
 ---
 ## Contact:
