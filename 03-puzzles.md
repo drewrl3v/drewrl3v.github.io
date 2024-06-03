@@ -67,3 +67,7 @@ I have a convex pentagon with a total perimeter of size 1. I then line the floor
 lines each spaced 1 unit apart from each other. I then toss the pentagon like a coin. What is 
 the probability that it intersects a line?
 
+
+**June 2024** 
+I have an equilateral triangle comprised of 9 unit equilateral triangles. I shade each unit triangle either red or blue with equal probability.
+We say that a sub-triangle is comprised of 4 unit equilateral triangles. What's the probability that there will be no blue sub-triangle?
