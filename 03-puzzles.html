@@ -10,8 +10,19 @@
 body {
     font-family: 'Verdana', sans-serif
 } 
+
+#icosahedron-container {
+            position: absolute;
+            top: -15px;
+            left: 75px;
+            width:  150px;
+            height: 150px;
+        }
+
 </style>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
 <body>
 
     <h5>
@@ -26,6 +37,8 @@ body {
     </h2>
 
 
+
+
 <div style="max-width: 870px;"> <!-- 600 -->
 <p style="background-color: rgb( 195, 182, 220 ); display: inline-block;"">
 <em>
@@ -38,6 +51,9 @@ Have fun!
 </em>
 </p>
 </div>
+
+
+<h2 id="icosahedron-container"></h2>
 
 
 <h4>September 2023:</h4>
@@ -121,7 +137,44 @@ You place a large number of points randomly in the unit square, what is the dist
 <h4>October 2024:</h4>
 Given a 6 by 6 grid of points, can you remove 6 of the points so that there is an even number of points in each row, column, and the two main diagonals?
 
+<h4>November 2024:</h4>
+Player A has 100 fair coins and player B has 101 fair coins. Both of them
+toss their respective coins simultaneously and count the number of heads they each respectively received.
+Whoever has more heads is declared the winner winner. What's the probability that player B beats player
+A?
+
 </div>
+
+<script>
+    // Create scene
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); // transparent background
+    const container = document.getElementById('icosahedron-container');
+
+    // Set up renderer size
+    renderer.setSize(container.offsetWidth, container.offsetHeight);
+    container.appendChild(renderer.domElement);
+
+    // Create an icosahedron geometry
+    const geometry = new THREE.IcosahedronGeometry(1, 0);
+    const material = new THREE.MeshBasicMaterial({ color: 0x6f5a96, wireframe: true });
+    const icosahedron = new THREE.Mesh(geometry, material);
+    scene.add(icosahedron);
+    icosahedron.scale.set(0.75, 0.75, 0.75); // Reduce size to 50%
+
+    camera.position.z = 3;
+
+    // Animation function
+    function animate() {
+        requestAnimationFrame(animate);
+        icosahedron.rotation.x += 0.01;
+        icosahedron.rotation.y += 0.01;
+        renderer.render(scene, camera);
+    }
+
+    animate();
+</script>
 </body>
 
 
