@@ -11,14 +11,6 @@ body {
     font-family: 'Verdana', sans-serif
 } 
 
-#icosahedron-container {
-            position: absolute;
-            top: -15px;
-            left: 75px;
-            width:  150px;
-            height: 150px;
-        }
-
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -145,36 +137,6 @@ A?
 
 </div>
 
-<script>
-    // Create scene
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); // transparent background
-    const container = document.getElementById('icosahedron-container');
-
-    // Set up renderer size
-    renderer.setSize(container.offsetWidth, container.offsetHeight);
-    container.appendChild(renderer.domElement);
-
-    // Create an icosahedron geometry
-    const geometry = new THREE.IcosahedronGeometry(1, 0);
-    const material = new THREE.MeshBasicMaterial({ color: 0x6f5a96, wireframe: true });
-    const icosahedron = new THREE.Mesh(geometry, material);
-    scene.add(icosahedron);
-    icosahedron.scale.set(0.75, 0.75, 0.75); // Reduce size to 50%
-
-    camera.position.z = 3;
-
-    // Animation function
-    function animate() {
-        requestAnimationFrame(animate);
-        icosahedron.rotation.x += 0.01;
-        icosahedron.rotation.y += 0.01;
-        renderer.render(scene, camera);
-    }
-
-    animate();
-</script>
 </body>
 
 
