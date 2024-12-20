@@ -10,8 +10,153 @@
 body {
     font-family: 'Verdana', sans-serif
 } 
+.holo-card {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: all 0.3s ease;
+    background: #5c1bd5;
+    cursor: pointer;
+}
+
+.holo-card::before {
+    content: '';
+    position: absolute;
+    inset: -100%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(
+        115deg,
+        transparent 0%,
+        rgba(255, 0, 150, 0.4) 30%,
+        rgba(0, 255, 255, 0.4) 45%,
+        rgba(255, 255, 0, 0.4) 60%,
+        rgba(0, 150, 255, 0.4) 75%,
+        transparent 100%
+    );
+    transition: transform 0.45s ease;
+    pointer-events: none;
+    mix-blend-mode: color-dodge;
+    animation: holoGradient 5s ease infinite;
+}
+
+.holo-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        125deg,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+    transition: opacity 0.3s ease;
+    mix-blend-mode: overlay;
+    opacity: 0;
+}
+
+@keyframes holoGradient {
+    0%, 100% {
+        opacity: 0.8;
+        transform: translate(0%, 0%);
+    }
+    33% {
+        opacity: 0.9;
+        transform: translate(-10%, -10%);
+    }
+    66% {
+        opacity: 0.8;
+        transform: translate(10%, 10%);
+    }
+}
+
+.holo-card img {
+    position: relative;
+    z-index: 2;
+    width: 95%;
+    height: auto;
+    border-radius: 5px;
+    filter: contrast(1.1) saturate(1.2);
+}
+
+.holo-card:hover::after {
+    opacity: 1;
+}
+
+.holo-shine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.5),
+        transparent
+    );
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    mix-blend-mode: overlay;
+}
+
+.holo-card:hover .holo-shine {
+    opacity: 1;
+}
 </style>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const cards = document.querySelectorAll('.holo-card');
+
+        cards.forEach((card) => {
+            let rect = card.getBoundingClientRect();
+
+            const handleMove = (e) => {
+                rect = card.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+
+                const rotateY = ((mouseX / rect.width) - 0.5) * 20;
+                const rotateX = ((mouseY / rect.height) - 0.5) * -20;
+
+                const shine = card.querySelector('.holo-shine');
+                const moveX = ((mouseX / rect.width) * 100) - 50;
+                const moveY = ((mouseY / rect.height) * 100) - 50;
+
+                card.style.transform = `
+                    perspective(1000px)
+                    rotateY(${rotateY}deg)
+                    rotateX(${rotateX}deg)
+                    scale3d(1.02, 1.02, 1.02)
+                `;
+
+                shine.style.transform = `translateX(${moveX}%) translateY(${moveY}%)`;
+            };
+
+            const handleLeave = () => {
+                card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
+            };
+
+            const shine = document.createElement('div');
+            shine.className = 'holo-shine';
+            card.appendChild(shine);
+
+            card.addEventListener('mousemove', handleMove);
+            card.addEventListener('mouseleave', handleLeave);
+        });
+    });
+</script>
 <body>
 
     <h5>
@@ -41,7 +186,7 @@ body {
     </tr>
     <tr>
         <td><img src="../imgs/galax1.png" width="400"><img src="../imgs/galax1.2.png" width="400"><img src="../imgs/galax1.3.png" width="400"></td>
-        <td><img src="../imgs/galax2.png" width="400"></td>
+        <td><div class="holo-card"><img src="../imgs/galax2.png" alt="Galax1"></div></td>
         <td></td>
     </tr>
     <tr>
@@ -51,7 +196,7 @@ body {
     </tr>
     <tr>
         <td><img src="../imgs/pac1.png" width="400"></td>
-        <td><img src="../imgs/pac2.png" width="400"></td>
+        <td><div class="holo-card" style="max-width: 400px; max-height: 300px;"><img src="../imgs/pac2.png" alt="pac2"></div></td>
         <td></td>
     </tr>
     <tr>
@@ -61,7 +206,7 @@ body {
     </tr>
     <tr>
         <td><img src="../imgs/better1.png" width="400"></td>
-        <td><img src="../imgs/better2.png" width="400"></td>
+        <td><div class="holo-card" style="max-width: 400px; max-height: 175px;"><img src="../imgs/better2.png" alt="better"></div></td>
         <td></td>
     </tr>
 
@@ -72,7 +217,7 @@ body {
     </tr>
     <tr>
         <td><img src="../imgs/dodt1.png" width="400"></td>
-        <td><img src="../imgs/dodt2.png" width="400"></td>
+        <td><div class="holo-card" style="max-width: 400px; max-height: 275px;"><img src="../imgs/dodt2.png" alt="dodt"></div></td>
         <td></td>
     </tr>
     <tr>
@@ -81,7 +226,7 @@ body {
         <td>NA</td>
     </tr>
     <tr>
-        <td><img src="../imgs/think_twice1.png" width="400"></td>
+        <td><div class="holo-card" style="max-width: 400px; max-height: 300px;"><img src="../imgs/think_twice1.png" alt="think_twice1"></div></td>
         <td><img src="../imgs/think_twice2.png" width="400"></td>
         <td></td>
     </tr>
@@ -91,7 +236,7 @@ body {
         <td><a style="color:#6f5a96" href="https://github.com/mingluzhao/Latent-Plan-Transformer/tree/main">code</a></td>
     </tr>
     <tr>
-        <td><img src="../imgs/latent_plan.png" width="400"></td>
+        <td><div class="holo-card" style="max-width: 400px; max-height: 225px;"><img src="../imgs/latent_plan.png" alt="latent_plane"></div></td>
         <td><img src="../imgs/latent_plan2.png" width="400"></td>
         <td></td>
     </tr>
@@ -101,7 +246,7 @@ body {
         <td><a style="color:#6f5a96" href="https://github.com/drewrl3v/diff-vq-vae">code</a></td>
     </tr>
     <tr>
-        <td><img src="../imgs/origin_vs_recon_all.png" width="400"></td>
+        <td><div class="holo-card" style="max-width: 400px; max-height: 250px;"><img src="../imgs/origin_vs_recon_all.png" alt="og_vvs_recon"></div></td>
         <td><img src="../imgs/Perturb_MCP_2.png" width="400"></td>
         <td></td>
     </tr>
@@ -112,7 +257,7 @@ body {
     </tr>
     <tr>
         <td><img src="../imgs/glm_fdr.png" width="400"></td>
-        <td><img src="../imgs/sir_fdr.png" width="400"></td>
+        <td><div class="holo-card" style="max-width: 400px; max-height: 190px;"><img src="../imgs/sir_fdr.png" alt="sir_fdr"></div></td>
         <td></td>
     </tr>
 
@@ -124,7 +269,7 @@ body {
     </tr>
     <tr>
         <td><img src="../imgs/sdsra1.png" width="400"></td>
-        <td><img src="../imgs/sdsra2.png" width="400"></td>
+        <td><div class="holo-card" style="max-width: 400px; max-height: 125px;"><img src="../imgs/sdsra2.png" alt="sdsra"></div></td>
         <td></td>
     </tr>
     <tr>
@@ -134,7 +279,7 @@ body {
     </tr>
     <tr>
         <td><img src="../imgs/streamnet_bundles.png" width="400"></td>
-        <td><img src="../imgs/streamnet_whole.png" width="400"></td>
+        <td><div class="holo-card" style="max-width: 400px; max-height: 200px;"><img src="../imgs/streamnet_whole.png" alt="bundle_whole"></div></td>
         <td></td>
     </tr>
     <tr>
@@ -143,7 +288,7 @@ body {
         <td><a style="color:#6f5a96" href="https://github.com/drewrl3v/Streamline-Registration-via-Parallel-Transport">code</a></td>
     </tr>
     <tr>
-        <td><img src="../imgs/align_par.png" width="400"></td>
+        <td><div class="holo-card" style="max-width: 400px; max-height: 250px;"><img src="../imgs/align_par.png" alt="align_par"></div></td>
         <td><img src="../imgs/align_reg.png" width="400"></td>
         <td></td>
     </tr>
@@ -153,7 +298,7 @@ body {
         <td>NA</td>
     </tr>
     <tr>
-        <td><img src="../imgs/warp_bump.png" width="400"></td>
+        <td><div class="holo-card" style="max-width: 400px; max-height: 225px;"><img src="../imgs/warp_bump.png" alt="warp_bump"></div></td>
         <td><img src="../imgs/warp_bundle.png" width="400"></td>
         <td></td>
     </tr>
