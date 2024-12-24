@@ -45,7 +45,7 @@ body {
     transition: transform 0.45s ease;
     pointer-events: none;
     mix-blend-mode: color-dodge;
-    animation: holoGradient 5s ease infinite;
+    /*animation: holoGradient 5s ease infinite;*/
 }
 
 .holo-card::after {
@@ -63,7 +63,7 @@ body {
     opacity: 0;
 }
 
-@keyframes holoGradient {
+/*@keyframes holoGradient {
     0%, 100% {
         opacity: 0.8;
         transform: translate(0%, 0%);
@@ -76,7 +76,7 @@ body {
         opacity: 0.8;
         transform: translate(10%, 10%);
     }
-}
+}*/
 
 .holo-card img {
     position: relative;
@@ -99,15 +99,22 @@ body {
     bottom: 0;
     background: linear-gradient(
         90deg,
-        transparent,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 30%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0.3) 70%,
+        transparent 100%
+        /*transparent,
         rgba(255, 255, 255, 0.5),
         transparent
+        */
     );
     z-index: 3;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
     mix-blend-mode: overlay;
+    filter: blur(10px);
 }
 
 .holo-card:hover .holo-shine {
