@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>
+    Blog
+</title>
+
+<style>
+body {
+    font-family: 'Verdana', sans-serif
+} 
+</style>
+
+
+<script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+
+    <h5>
+        <a style="color:#6f5a96" href="../index.html"      > Home</a> | 
+        <a style="color:#6f5a96" href="../01-research.html"> Research</a> |
+        <a style="color:#6f5a96" href="../02-teaching.html"> Teaching</a> |
+        <a style="color:#6f5a96" href="../03-puzzles.html" > Puzzles</a> |
+        <a style="color:#6f5a96" href="../04-blog.html" > Blog</a> |
+    </h5>
+
+
+<div style="max-width: 870px;"> <!-- 600 -->
+
+<section class="blog-post">
+    <h4>RL Isn't Enough:</h4>
+  
+    <p>
+      There has been a plethora of tricks and heuristics that have boosted LLM performance. 
+      In particular, Reinforcement Learning (RL) has surged in popularity 
+      thanks in part to DeepSeek-R1 and its tuning via GRPO. 
+      However, I'm betting that RL alone won't suffice to achieve AGI. At its core, RL assumes a world model. 
+      It works in domains like Go or chess, where the rules are fixed, the state space is combinatorially constrained, 
+      and all the niceties required by RL environments are guaranteed.
+    </p>
+  
+    <p>
+      Dynamic programming (a la Dimitri P. Bertsekas<sup><a href="#dp">3</a></sup> ) certainly influenced modern RL, 
+      but when "the world is fuzzy"-when ground rules aren't set in stone, 
+      constraints aren't guaranteed or composable-pure, then it's known that approximate dynamic programming struggles (and similarly RL struggles).
+      <sup><a href="#tetris">5</a></sup>
+      This is why, even today, we typically pretrain an LLM and then impose an RL-based policy on top, versus doing RL language modeling from scratch. 
+      Yet I suspect that pipeline alone will still fall short of AGI.
+    </p>
+  
+    <p>
+      Lin et al. (2021) shows that any autoregressive model whose parameter count and compute scale only polynomially with sequence length 
+      <em>cannot</em> express <em>all</em> languages in the class P (P for polynomial, NP for non-deterministic polynomial, ect.).<sup><a href="#ref-lin-et-al">1</a></sup> 
+      In fact, standard autoregressive models, despite their impressive empirical successes can only capture <em>some</em> 
+      languages in P. There exist decision problems in P where no such autoregressive model can represent it without 
+      allowing super-polynomial growth in parameters of the model.<sup><a href="#ref-lin-et-al">1</a></sup> 
+    </p>
+  
+    <figure>
+      <img src="assets/lin_table1.png" alt="Table 1 from Lin et al.: feature matrix of parametric model families", width="700"/>
+      <figcaption>Table 1: A feature matrix of parametric model families (Lin et al., 2021).</figcaption>
+    </figure>
+  
+    <p>
+      As a consequence, we can't rely on polynomial-sized, purely autoregressive LLMs to capture every efficiently decidable language, 
+      nor to serve as oracle solvers for all polynomial-time problems. Bootstrapping RL to an autoregressive can help somewhat but you're still limited by the 
+      LLM backbone. To break through toward AGI, we'll need architectures that either 
+      sacrifice some efficiency such as energy-based or semiparametric "lookup" models or introduce latent structure in a way that light marginalization can escape these expressivity limits. 
+      Continuous progress in hybridizing LLMs with external memories, solvers, or dynamic latent variables will likely be essential steps on the path beyond what RL + LLM alone can deliver.
+    </p>
+
+    <h5>Some Hope (Also my bias):</h5>
+<p>
+  There is a hybridization between energy-based models and lightly marginalized latent-variable models that I suspect can help. I had the fortune of working with Deqian Kong on the 
+  <em>Latent Plan Transformer</em> (2024), which learns to compress high-dimensional trajectory data into compact latent plans, enabling efficient long-horizon planning via latent-space inference<sup><a href="#lp">4</a></sup>. 
+  This then evolved into the <em>Latent Thought Model</em> (2025), which adds dynamic latent reasoning steps, allowing the model 
+  to refine and adapt its latent decisions yielding stronger performance on complex sequential tasks<sup><a href="#ltm">5</a></sup>.
+  
+  Basically we can think of an LLM as learning p(y|x), i.e. the probability of the next token y given the previous n-1 tokens x.
+  But the trick is we may express this as follows
+
+  $$
+  p(y|x) = \int p(z | x)p(y | z, x) dy
+  $$
+
+  The intuition for doing this is as follows, for any sequence x, you can have rough plan or idea z.
+  However, it's possible that this x is out of distribution (this will always be the case in real life since future data always evolves). Then you need to perform some posterior optimization 
+  to adjust your plan/thought given the current environment (notice that this helps when the environment is fuzzy.). The other step you can perform is given x you condition on your formulated 
+  plan/thought z to then predict x. So the lesson here is that as long as you're will to do some posterior optimization on a low-dimensional latent z you can better handle when x is out of distribution.
+  As far as I'm aware, RL can't handle this situation. RL isn't enough.
+</p>
+
+  
+    <hr />
+
+  <section id="cite-this-blog">
+    <h5>How to cite this blog</h5>
+    <pre class="bibtex">
+  @article{lizarraga2025rlisntenough,
+    title   = {RL Isn't Enough},
+    author  = {Andrew Lizarraga},
+    journal = {https://drewrl3v.github.io/},
+    year    = {2025},
+    month   = {April},
+    url     = {https://drewrl3v.github.io/blogs/april2025.html}
+  }
+    </pre>
+  </section>
+
+
+
+  
+    <hr />
+  
+    <section id="references">
+
+
+    <h5>References</h5>
+    <ol>
+      <li id="ref-lin-et-al">
+        Lin, Chu-Cheng, Jaech, Aaron, Li, Xin, Gormley, Matthew R., &amp; Eisner, Jason. (2021).  
+        Limitations of Autoregressive Models and Their Alternatives.  
+        <em>Proceedings of the 2021 Conference on Empirical Methods in NLP</em>.  
+        <a href="https://arxiv.org/abs/2010.11939" target="_blank">arXiv:2010.11939</a>.
+      </li>
+      <li id="dp">
+        Bertsekas, Dimitri P. (1995).  
+        <em>Dynamic Programming and Optimal Control</em> (2nd ed.). Athena Scientific.
+      </li>
+      <li id="lp">
+        Kong, Deqian, Xu, Dehong, Zhao, Minglu, Pang, Bo, Xie, Jianwen, Lizarraga, Andrew, Huang, Yuhao, &amp; Xie, Sirui. (2024).  
+        Latent Plan Transformer for Trajectory Abstraction: Planning as Latent Space Inference.  
+        In <em>Advances in Neural Information Processing Systems</em>, 37, 123379-123401.
+        <a href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/df22a19686a558e74f038e6277a51f68-Abstract-Conference.html" target="_blank">https://proceedings.neurips.cc</a>.
+      </li>
+      <li id="ltm">
+        Deqian Kong and Minglu Zhao and Dehong Xu and Bo Pang and Shu Wang and Edouardo Honig and Zhangzhang Si and Chuan Li and Jianwen Xie and Sirui Xie and Ying Nian Wu (2025).  
+        Scalable Language Models with Posterior Inference of Latent Thought Vectors.  
+        <a href="https://arxiv.org/abs/2502.01567" target="_blank">arXiv:2502.01567</a>.
+      </li>
+
+      <li id="tetris">
+            Gabillon, Victor and Ghavamzadeh, Mohammad and Scherrer, Bruno. (2023).
+            Approximate Dynamic Programming Finally Performs Well in the Game of Tetris.
+            In <em>Advances in Neural Information Processing Systems</em>,
+        <a href="https://proceedings.neurips.cc/paper/2013/hash/7504adad8bb96320eb3afdd4df6e1f60-Abstract.html" target="_blank">https://proceedings.neurips.cc</a>.
+      </li>
+    </ol>
+      </ol>
+    </section>
+  </section>
+
+
+
+
+
+
+</div>
+</body>
