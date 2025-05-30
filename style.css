@@ -1,0 +1,30 @@
+.card-container {
+    perspective: 50px;
+    width: 30px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.holographic {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    animation: shimmer 2s infinite;
+    position: relative;
+}
+
+@keyframes shimmer {
+    0% {
+        filter: hue-rotate(0deg) brightness(1);
+    }
+    50% {
+        filter: hue-rotate(360deg) brightness(1.5);
+    }
+    100% {
+        filter: hue-rotate(0deg) brightness(1);
+    }
+}
