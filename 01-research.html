@@ -7,13 +7,38 @@
 </title>
 
 <style>
+/* Your updated CSS provided above goes here */
 body {
-    font-family: 'Verdana', sans-serif
-} 
+    font-family: 'Verdana', sans-serif;
+}
+
+body.card-zoomed {
+    overflow: hidden;
+}
+
+.zoom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    cursor: pointer;
+}
+
+.zoom-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
 .holo-card {
     position: relative;
-    width: 400px;
-    height: 400px;
+    /*max-width: 400px;*/  /* Removed from here to let inline style control */
+    /*max-height: 400px;*/ /* Removed from here to let inline style control */
     border-radius: 10px;
     overflow: hidden;
     display: flex;
@@ -22,9 +47,10 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     perspective: 1000px;
     transform-style: preserve-3d;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     background: #5c1bd5;
     cursor: pointer;
+    transform-origin: center center;
 }
 
 .holo-card::before {
@@ -45,7 +71,6 @@ body {
     transition: transform 0.45s ease;
     pointer-events: none;
     mix-blend-mode: color-dodge;
-    /*animation: holoGradient 5s ease infinite;*/
 }
 
 .holo-card::after {
@@ -63,32 +88,19 @@ body {
     opacity: 0;
 }
 
-/*@keyframes holoGradient {
-    0%, 100% {
-        opacity: 0.8;
-        transform: translate(0%, 0%);
-    }
-    33% {
-        opacity: 0.9;
-        transform: translate(-10%, -10%);
-    }
-    66% {
-        opacity: 0.8;
-        transform: translate(10%, 10%);
-    }
-}*/
+.holo-card:hover::after {
+    opacity: 1;
+}
 
-.holo-card img {
+.holo-card img,
+.holo-card video {
     position: relative;
     z-index: 2;
     width: 95%;
     height: auto;
     border-radius: 5px;
     filter: contrast(1.1) saturate(1.2);
-}
-
-.holo-card:hover::after {
-    opacity: 1;
+    display: block;
 }
 
 .holo-shine {
@@ -104,10 +116,6 @@ body {
         rgba(255, 255, 255, 0.5) 50%,
         rgba(255, 255, 255, 0.3) 70%,
         transparent 100%
-        /*transparent,
-        rgba(255, 255, 255, 0.5),
-        transparent
-        */
     );
     z-index: 3;
     opacity: 0;
@@ -120,50 +128,271 @@ body {
 .holo-card:hover .holo-shine {
     opacity: 1;
 }
+
 </style>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const cards = document.querySelectorAll('.holo-card');
+        let currentZoomedCard = null;
+        let overlay = null;
+
+        overlay = document.createElement('div');
+        overlay.className = 'zoom-overlay';
+        document.body.appendChild(overlay);
+
+        overlay.addEventListener('click', () => {
+            if (currentZoomedCard) {
+                unzoomCard(currentZoomedCard);
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && currentZoomedCard) {
+                unzoomCard(currentZoomedCard);
+            }
+        });
 
         cards.forEach((card) => {
-            let rect = card.getBoundingClientRect();
-
+            // Your original holographic effect handlers, now modified to support zoomed state
             const handleMove = (e) => {
-                rect = card.getBoundingClientRect();
+                // Always get the current rect, whether zoomed or not
+                const rect = card.getBoundingClientRect();
+
                 const mouseX = e.clientX - rect.left;
                 const mouseY = e.clientY - rect.top;
 
-                const rotateY = ((mouseX / rect.width) - 0.5) * 20;
-                const rotateX = ((mouseY / rect.height) - 0.5) * -20;
+                const rotateY = ((mouseX / rect.width) - 0.5) * 20; // Original rotation factor
+                const rotateX = ((mouseY / rect.height) - 0.5) * -20; // Original rotation factor
 
                 const shine = card.querySelector('.holo-shine');
                 const moveX = ((mouseX / rect.width) * 100) - 50;
                 const moveY = ((mouseY / rect.height) * 100) - 50;
 
-                card.style.transform = `
-                    perspective(1000px)
-                    rotateY(${rotateY}deg)
-                    rotateX(${rotateX}deg)
-                    scale3d(1.02, 1.02, 1.02)
-                `;
-
-                shine.style.transform = `translateX(${moveX}%) translateY(${moveY}%)`;
+                if (card.classList.contains('zoomed')) {
+                    // When zoomed, combine the centering transform with the interactive rotation
+                    card.style.transform = `
+                        translate(-50%, -50%)
+                        perspective(1000px)
+                        rotateY(${rotateY}deg)
+                        rotateX(${rotateX}deg)
+                    `;
+                    // Ensure shine and ::after are visible when mouse is over zoomed card
+                    if (shine) {
+                        shine.style.opacity = '1';
+                        shine.style.transform = `translateX(${moveX}%) translateY(${moveY}%)`;
+                    }
+                    card.style.setProperty('--after-opacity', '1'); // Set custom property for ::after opacity
+                } else {
+                    // Original hover effect for unzoomed cards
+                    card.style.transform = `
+                        perspective(1000px)
+                        rotateY(${rotateY}deg)
+                        rotateX(${rotateX}deg)
+                        scale3d(1.02, 1.02, 1.02) /* Slight scale on hover for unzoomed */
+                    `;
+                    if (shine) shine.style.transform = `translateX(${moveX}%) translateY(${moveY}%)`;
+                    card.style.setProperty('--after-opacity', '1');
+                }
             };
 
             const handleLeave = () => {
-                card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
+                const shine = card.querySelector('.holo-shine');
+                if (card.classList.contains('zoomed')) {
+                    // When zoomed, reset rotation but keep centering transform
+                    card.style.transform = 'translate(-50%, -50%) perspective(1000px) rotateY(0deg) rotateX(0deg)';
+                    // Hide shine and ::after when mouse leaves zoomed card
+                    if (shine) {
+                        shine.style.opacity = '0';
+                        shine.style.transform = 'none';
+                    }
+                    card.style.setProperty('--after-opacity', '0');
+                } else {
+                    // Original leave effect for unzoomed cards
+                    card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
+                    if (shine) shine.style.transform = 'none';
+                    card.style.setProperty('--after-opacity', '0');
+                }
             };
 
-            const shine = document.createElement('div');
-            shine.className = 'holo-shine';
-            card.appendChild(shine);
+            // Add the holo-shine element to each card if not already present
+            let shineElement = card.querySelector('.holo-shine');
+            if (!shineElement) {
+                shineElement = document.createElement('div');
+                shineElement.className = 'holo-shine';
+                card.appendChild(shineElement);
+            }
+
+            // Create a custom CSS property for ::after opacity, which JS can control
+            // This is because ::after cannot be directly styled by JS
+            card.style.setProperty('--after-opacity', '0');
+            const style = document.createElement('style');
+            style.textContent = `
+                .holo-card.zoomed::after,
+                .holo-card:hover::after {
+                    opacity: var(--after-opacity);
+                }
+            `;
+            card.appendChild(style); // Append style to card to make it specific
 
             card.addEventListener('mousemove', handleMove);
             card.addEventListener('mouseleave', handleLeave);
+
+
+            card.addEventListener('click', (e) => {
+                // Prevent click from bubbling to the overlay *if* it's the current zoomed card
+                // or if it's not zoomed yet and we're about to zoom it.
+                if (!card.classList.contains('zoomed') || currentZoomedCard === card) {
+                    e.stopPropagation();
+                }
+
+                if (currentZoomedCard === card) {
+                    unzoomCard(card);
+                } else {
+                    if (currentZoomedCard) {
+                        unzoomCard(currentZoomedCard);
+                    }
+                    zoomCard(card);
+                }
+            });
         });
+
+        function zoomCard(card) {
+            if (currentZoomedCard) {
+                unzoomCard(currentZoomedCard);
+            }
+
+            const rect = card.getBoundingClientRect();
+            // Store original properties for unzooming
+            card.originalProps = {
+                top: rect.top,
+                left: rect.left,
+                width: rect.width,
+                height: rect.height,
+                // Capture current transform, which might include hover rotation/scale
+                transform: card.style.transform || 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)',
+                zIndex: card.style.zIndex || '',
+                position: card.style.position || ''
+            };
+
+            // Calculate target dimensions for the zoomed card
+            const screenPadding = 60; // Pixels padding from screen edges
+            const maxAllowedWidth = window.innerWidth - screenPadding * 2;
+            const maxAllowedHeight = window.innerHeight - screenPadding * 2;
+
+            // Target size: Zoom factor around 1.8-2.5x, up to 80% of viewport, max 800px width.
+            // Adjust these values for your desired zoom level.
+            let targetWidth = Math.min(rect.width * 2, maxAllowedWidth, 800);
+            let targetHeight = (rect.height / rect.width) * targetWidth; // Maintain aspect ratio
+
+            // Adjust if target height exceeds screen height
+            if (targetHeight > maxAllowedHeight) {
+                targetHeight = maxAllowedHeight;
+                targetWidth = (rect.width / rect.height) * targetHeight;
+            }
+
+            // Apply initial fixed positioning matching its current screen position, without transition
+            card.style.transition = 'none';
+            card.style.position = 'fixed';
+            card.style.top = `${rect.top}px`;
+            card.style.left = `${rect.left}px`;
+            card.style.width = `${rect.width}px`;
+            card.style.height = `${rect.height}px`;
+            card.style.zIndex = '1000'; // Bring to front
+
+            // Force reflow to apply initial fixed position without transition
+            // eslint-disable-next-line no-unused-expressions
+            card.offsetWidth;
+
+            // Now apply the transition and target properties for zooming
+            // Include transform, top, left, width, height for smooth animation
+            card.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), ' +
+                                   'top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), ' +
+                                   'left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), ' +
+                                   'width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), ' +
+                                   'height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+            card.style.top = '50%';
+            card.style.left = '50%';
+            card.style.width = `${targetWidth}px`;
+            card.style.height = `${targetHeight}px`;
+            // Keep base perspective and no initial rotation, as mousemove will handle it
+            card.style.transform = `translate(-50%, -50%) perspective(1000px) rotateY(0deg) rotateX(0deg)`;
+
+            card.classList.add('zoomed');
+            document.body.classList.add('card-zoomed');
+            overlay.classList.add('visible');
+            currentZoomedCard = card;
+
+            // Immediately set ::after and holo-shine to visible based on the --after-opacity custom property
+            // and their default hover state (which is now combined with the zoomed state logic)
+            const shineElement = card.querySelector('.holo-shine');
+            if (shineElement) shineElement.style.opacity = '1';
+            card.style.setProperty('--after-opacity', '1');
+
+            // Play video if it exists
+            const videoElement = card.querySelector('video');
+            if (videoElement) {
+                videoElement.play();
+            }
+        }
+
+        function unzoomCard(card) {
+            if (!card || !card.originalProps) return;
+
+            card.classList.remove('zoomed');
+            document.body.classList.remove('card-zoomed');
+            overlay.classList.remove('visible');
+
+            // Set transition for returning animation
+            card.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), ' +
+                                   'top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), ' +
+                                   'left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), ' +
+                                   'width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), ' +
+                                   'height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+            // Restore original properties
+            card.style.top = `${card.originalProps.top}px`;
+            card.style.left = `${card.originalProps.left}px`;
+            card.style.width = `${card.originalProps.width}px`;
+            card.style.height = `${card.originalProps.height}px`;
+            // Restore initial, non-hovered transform state.
+            card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
+            card.style.zIndex = card.originalProps.zIndex;
+
+            // Stop video if it exists
+            const videoElement = card.querySelector('video');
+            if (videoElement) {
+                videoElement.pause();
+            }
+
+            // Clean up after the transition completes
+            card.addEventListener('transitionend', function handler() {
+                card.removeEventListener('transitionend', handler);
+
+                // Reset inline styles that were applied for fixed positioning
+                card.style.position = card.originalProps.position;
+                card.style.top = '';
+                card.style.left = '';
+                card.style.width = '';
+                card.style.height = '';
+                card.style.zIndex = '';
+                card.style.transition = ''; // Reset transition to allow default CSS
+
+                // Ensure hover effects are reset for unzoomed state
+                const shineElement = card.querySelector('.holo-shine');
+                if (shineElement) {
+                    shineElement.style.opacity = '0'; // Default hidden unless hovered
+                    shineElement.style.transform = '';
+                }
+                card.style.setProperty('--after-opacity', '0'); // Default hidden unless hovered
+            }, { once: true });
+
+            currentZoomedCard = null;
+        }
     });
 </script>
+
 <body>
 
     <h5>
@@ -191,13 +420,13 @@ body {
     <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <tr>
         <td>Latent Adaptive Planner for Dynamic Manipulation</td>
-        <td><a style="color:#6f5a96" href="https://arxiv.org/abs/2505.03077">arXiv</a></td>
+        <td><a style="color:#6f5a96" href="https://proceedings.mlr.press/v305/noh25a.html">CoRL</a></td>
         <td>NA</a></td>
     </tr>
     <tr>
         <td><img src="../imgs/robot1.png" width="400"></td>
         <td><div class="holo-card" style="max-width: 400px; max-height: 225px;">
-            <video width="375" autoplay muted playsinline loop>
+            <video width="375" autoplay playsinline loop>
                 <source src="imgs/robo_policy.mp4" type="video/mp4">
             </video>
         </div></td>
