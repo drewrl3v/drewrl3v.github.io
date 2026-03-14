@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>
+    Blog
+</title>
+
+<style>
+body {
+    font-family: 'Verdana', sans-serif
+} 
+</style>
+
+
+<script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<body>
+
+    <h5>
+        <a style="color:#6f5a96" href="../index.html"      > Home</a> | 
+        <a style="color:#6f5a96" href="../01-research.html"> Research</a> |
+        <a style="color:#6f5a96" href="../02-teaching.html"> Teaching</a> |
+        <a style="color:#6f5a96" href="../03-puzzles.html" > Puzzles</a> |
+        <a style="color:#6f5a96" href="../04-blog.html" > Blog</a> |
+    </h5>
+
+
+<div style="max-width: 870px;"> <!-- 600 -->
+
+<section class="blog-post">
+    <h4>The Quest for Approximate \(\pi\):</h4>
+  
+    <p>
+      Readers should be familiar with some classic approaches to using monte carlo methods to estimate \(\pi\).
+      However the typical textbook lesson only gives you a good estimate to 1 or 2 decimal points and our goal 
+      here is to get accuracy upto 10 decimal places in a reasonable amount of time. Let the quest begin!
+    </p>
+
+    <p>
+      Let's recall the typical approach for estimating \(\pi\) via monte carlo: First, sample a large number of 
+      points uniformly in the unit square \([0,1]^2\), then count the number of points that land in the quarter 
+      circle and divide it by the total number of points that we samples. Scaling by 4 gives us an estimate for \(\pi\):
+    </p>
+
+    <p>
+      $$
+      \hat{\pi}_N
+      = 
+      \frac{4}{N}
+      \sum_{i=1}^N
+      \mathbb{I}_{\{x_i^2 + y_i^2 \leq 1\}}
+      $$
+
+      To understand how accurate this estimate of \(\pi\) is, note that the indicator term is Bernoulli, i.e.
+      \(\mathbb{I}_{\{x_i^2 + y_i^2 \leq 1\}} \sim Ber(p = \frac{\pi}{4})\). Also recall that Bernoulli random variables
+      have variacne \(p(1-p)\). So the variance of the estimator \(\hat{\pi}_N\) is given by 
+
+      $$
+      Var(\hat{\pi}_N)
+      = 
+      \frac{16}{N^2}
+      Var 
+      \left( 
+          \sum_{i=1}^N
+          \mathbb{I}_{\{x_i^2 + y_i^2 \leq 1\}}
+      \right)
+      $$
+
+      $$
+      =
+      \frac{16N}{N^2} p(1-p)
+      $$
+
+      $$
+      =
+      \frac{16}{N} p(1-p)
+      $$
+    </p>
+
+
+    With this we can quickly get the order of magnitude of \(N\) and compare it to the variance:
+
+    <pre><code class="language-python">                         
+    import math as m
+
+    def var_pi(n, p = m.pi/4): return (16/n) * p * (1-p)
+    magnitueds = [10**i for i in range(1,21)]
+    for num in magnitueds:
+        print(int(m.log10(num)), f"{var_pi(num):.20f}")
+    
+    Output:
+      1  0.26967662132698144717
+      2  0.02696766213269814749
+      3  0.00269676621326981475
+      4  0.00026967662132698145
+      5  0.00002696766213269815
+      6  0.00000269676621326981
+      7  0.00000026967662132698
+      8  0.00000002696766213270
+      9  0.00000000269676621327
+      10 0.00000000026967662133
+      11 0.00000000002696766213
+      12 0.00000000000269676621
+      13 0.00000000000026967662
+      14 0.00000000000002696766
+      15 0.00000000000000269677
+      16 0.00000000000000026968
+      17 0.00000000000000002697
+      18 0.00000000000000000270
+      19 0.00000000000000000027
+      20 0.00000000000000000003
+    </code></pre>                                               
+
+
+
+    Now to get precision of 10 decimal places we need the standard deviation to be less than \(10^{-10}\). 
+    Based on the computation above we see that when \(N \approx 10^{20}\). Another way to see this is to 
+    consider the following:
+
+    $$
+    \sqrt{Var(\pi_N)} 
+    < 
+    10^{-10}
+    $$
+
+    $$
+    \sqrt{
+        \frac{16}{N}p(1-p)
+    }
+    < 
+    10^{-10}
+    $$
+
+    $$
+    \frac{16}{N}p(1-p)
+    < 
+    10^{-20}
+    $$
+
+    $$
+    16p(1-p) 10^{20} < N
+    $$
+
+    I hope it's obvious that the lower bound number of samples \(N > 2.7 \times 10^{20}\) is impractical. 
+    Also keep in mind that the standard deviaiton has a rate of roughly \(O(\frac{1}{\sqrt{N}})\). 
+
+    One solution is determinging a sampling scheme that can imporve this rate. Quasi Monte Carlo 
+    methods can improve \(O(\frac{1}{\sqrt{N}})\) to \(O(\frac{(\log N)^k}{N})\) where \(k\) is the 
+    dimension of the problem. The idea is to use low-discrepancy deterministic sequences with better 
+    uniformity properties than purely random sequences, providing more accurate and efficient estimates 
+    compared to traditional Monte Carlo Simulations. Halton and Solbol are two such sequences.
+
+    Unfortunately however, this still won't be enough:
+
+    <pre><code class="language-python">                         
+
+    # The textbook monte carlo estimator:
+    def mc_pi(n):
+        x1 = np.random.uniform(0,1,n)
+        x2 = np.random.uniform(0,1,n)
+        #y = x1[np.sqrt(x1**2 + x2**2)<1] # The square root is redundant
+        y = x1[x1**2 + x2**2 < 1]
+        pi_est = 4 * len(y) / n
+        return pi_est
+
+    N = 10 ** 4
+    print(mc_pi(N))
+
+    Output:
+      3.1332 # Not great.
+
+    # Quasi monte carlo using a Sobol sampler.
+    def qmc_pi(n):
+        sobol = qmc.Sobol(d=2, scramble=True, bits=40) # sobol sequnce
+        x = sobol.random(n) # generate Quasi-Monte Carlo random numbers
+        x1 = x[:,0]
+        x2 = x[:,1]
+        #y = x1[np.sqrt(x1**2 + x2**2)<1] # square root is redundant
+        y = x1[x1**2 + x2**2 < 1] 
+        pi_est = 4 * len(y) / (n)
+        return pi_est
+
+    # number of samles needed for 10 decimals accuracy.
+    N2 = m.log2(2.7 * (10 ** 10))
+    print(N2)
+
+    # remember Sobol only accepts powers of 2
+    print(qmc_pi(2**20))
+
+    Output:
+      34.65224035614973 # Requiring 2**34 samples is far too much for my computer to handle.
+      3.141551971435547 # okay we got 3.145 which is just 3 decimal places. So better but not great!
+    </code></pre>                                               
+
+
+    We need more tricks! Another way to reduce the variance is to consider the integration formulation of the problem:
+
+    $$
+    \pi 
+    = 4 \int_0^1 \sqrt{1 - x^2} dx
+    $$
+
+    Recall that the indicator estimator had the following variance:
+
+    $$
+    Var(\hat{\pi}_N)
+    = 
+    \frac{16}{N} \frac{\pi}{4}\left(1-\frac{\pi}{4}\right)
+    \approx 
+    \frac{2.7}{n}
+    $$
+
+    Now for the integral formulation we have the following estimator
+
+    $$
+    \hat{\pi}_{int} 
+    = 
+    \frac{4}{n} 
+    \sum_{i=1}^n
+    \sqrt{1 - x_i^2}
+    $$
+
+    Let \(Y_i = \sqrt{1 - x_i^2}\) with \(x_i \sim U[0,1]\). Then we have:
+
+    $$
+    \mathbb{E}[Y_i] 
+    = 
+    \int_0^1
+    \sqrt{1 - x^2} dx 
+    = 
+    \frac{\pi}{4}
+    $$
+
+    And the variance is given by:
+
+    $$
+    Var(Y_i)
+    = 
+    \mathbb{E}[Y_i^2]
+    -
+    (\mathbb{E}[Y_i])^2
+    $$
+
+    $$
+    = 
+    \int_0^1 (1-x^2) dx
+    - 
+    \left(\frac{\pi}{4}\right)^2
+    $$
+
+    $$
+    = \frac{2}{3} 
+    - 
+    \frac{\pi^2}{16}
+    $$
+
+    Thus 
+
+    $$
+    Var(\hat{\pi}_{int})
+    = 
+    \frac{16}{n}
+    \left(
+        \frac{2}{3} 
+        - 
+        \frac{\pi^2}{16}
+    \right)
+    \approx \frac{0.78}{n}
+    $$
+
+    Okay this estimator shoule be roughly \(2.7/0.78 \approx 3.46\) times efficient as the previous one.
+    Let's see what we gain with this efficiency:
+
+    <pre><code class="language-python">                         
+    def qmc_pi_integral(n):
+        sobol = qmc.Sobol(d=1, scramble=True)
+        x = sobol.random(n).flatten()
+        fx = np.sqrt(1 - x**2)
+        return 4 * np.mean(fx)
+
+    print(qmc_pi_integral(2**20))
+
+    Output:
+      3.1415926553566957 # Great, now we have 3.14159265. But that's only 8 digits!
+    </code></pre>           
+
+
+  So we need .... more tricks! Let's intorduce Control Variates and Antithetic Variates.
+  For control variates:  we can introduce a known funciton \(h(x)\) with known expectation 
+  and high correlation with the target function \(f(x)\). 
+
+  Adjust the estimator as:
+
+  $$
+  \frac{4}{N} \sum_{i=1}^N (f(x_i) - \beta (h(x_i) - \mathbb{E}[h]))
+  $$
+
+  with \(f(x) = \sqrt{1 - x^2}\) and \(h(x) = 1-x\) whose expectation over 
+  \([0,1]\) is \(\mathbb{E}[h] = \frac{1}{2}\). 
+
+  Optimize \(\beta\) empirically to minimize variance. i.e. precompute:
+
+  $$
+  \beta 
+  = 
+  \frac{Cov(f, h)}{Var(h)}
+  $$
+
+  As for antithetic variates, the idea is that we can use symmetry to our advantage:
+  pairing each random \(x \sim U[0,1]\) with it's mirror \(1-x\). If \(f(x)\) is smooth and 
+  symmetric or if it's monotonic, then we may use:
+
+  $$
+  \frac{4}{2N} \sum_{i=1}^N [f(x_i) + f(1-x_i)]
+  $$
+
+  So let's combine the use of these techniques!
+
+
+  <pre><code class="language-python">                         
+  import numpy as np
+
+  def qmc_pi_antithetic_control(n):
+
+      sobol = qmc.Sobol(d=1, scramble=True)
+      x = sobol.random(n // 2).flatten() # We are actually using half the number of samples we typically would: 2^n --> 2^(n-1)
+      x_bar = 1 - x
+
+      x_full = np.concatenate([x, x_bar])
+
+      # Function and control variate
+      f = np.sqrt(1 - x_full**2)
+      h = 1 - x_full
+      Eh = 0.5
+
+      # Optimal beta (from full vector)
+      beta = np.cov(f, h)[0, 1] / np.var(h)
+
+      # Apply control variate
+      f_cv = f - beta * (h - Eh)
+
+      # Antithetic average: pair elements [x_i, 1 - x_i]
+      f_cv_avg = 0.5 * (f_cv[:n//2] + f_cv[n//2:])
+
+      return 4 * np.mean(f_cv_avg)
+
+  print(qmc_pi_antithetic_control(2**24))
+
+  Output:
+    3.141592653606968 # Great, now we have 3.141592653. 9 digits now!
+  </code></pre>           
+
+
+  Let's get that final digit by running multiple independent estimates and averaging them:
+
+  <pre><code class="language-python">                         
+
+  def qmc_pi_multiple_runs(n, num_runs=10):
+      """Run multiple independent estimates and average them"""
+      
+      results = []
+      for i in range(num_runs):
+          # Use different seeds for each run
+          sobol = qmc.Sobol(d=1, scramble=True)
+          x = sobol.random(n // 2).flatten()
+          x_bar = 1 - x
+          x_full = np.concatenate([x, x_bar])
+          
+          f = np.sqrt(1 - x_full**2)
+          h = 1 - x_full
+          Eh = 0.5
+          
+          # Stable covariance calculation
+          f_mean = np.mean(f)
+          h_mean = np.mean(h)
+          cov_fh = np.mean((f - f_mean) * (h - h_mean))
+          var_h = np.mean((h - h_mean)**2)
+          beta = cov_fh / var_h if var_h > 0 else 0
+          
+          f_cv = f - beta * (h - Eh)
+          f_cv_avg = 0.5 * (f_cv[:n//2] + f_cv[n//2:])
+          
+          results.append(4 * np.mean(f_cv_avg))
+      
+      return np.mean(results), np.std(results)
+
+  print(qmc_pi_multiple_runs(2**24))
+
+  Output:
+    (np.float64(3.141592653577687), np.float64(5.027322973198329e-11))
+    # Now we have all 10 digits and better yet our std indicates we can consistantly get it
+    # even though the process is random!
+  </code></pre>           
+
+  Not bad, just run the script for a second or two and we have our 10-digit estimate of \(\pi\)!
+  Have a great \(\pi\) day everyone!
+
+
+
+
+
+  
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+</div>
+<script>hljs.highlightAll();</script>
+</body>
