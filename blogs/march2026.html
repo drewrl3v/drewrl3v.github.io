@@ -331,7 +331,8 @@ body {
   def qmc_pi_antithetic_control(n):
 
       sobol = qmc.Sobol(d=1, scramble=True)
-      x = sobol.random(n // 2).flatten() # We are actually using half the number of samples we typically would: 2^n --> 2^(n-1)
+      # We are actually using half the number of samples we typically would: 2^n --> 2^(n-1)
+      x = sobol.random(n // 2).flatten()
       x_bar = 1 - x
 
       x_full = np.concatenate([x, x_bar])
