@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>
+    Blog
+</title>
+
+<style>
+body {
+    font-family: 'Verdana', sans-serif;
+    background-image:linear-gradient(rgba(255, 255, 255, 0.778), rgba(255, 156, 57, 0.382));
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+</style>
+
+
+<script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<body>
+
+    <h5>
+        <a style="color:#6f5a96" href="../index.html"      > Home</a> | 
+        <a style="color:#6f5a96" href="../01-research.html"> Research</a> |
+        <a style="color:#6f5a96" href="../02-teaching.html"> Teaching</a> |
+        <a style="color:#6f5a96" href="../03-puzzles.html" > Puzzles</a> |
+        <a style="color:#6f5a96" href="../04-blog.html" > Blog</a> |
+    </h5>
+
+
+<div style="max-width: 870px;"> <!-- 600 -->
+
+<section class="blog-post">
+    <h4>LeetCode Difficulty, Ramblings, and All That</h4>
+  
+    <p>
+    It's about time I get a job in the industry or form a startup ... Let's try industry first!
+    I've had very mixed results when applying to jobs and internships, here is the order in terms of 
+    what was most common (top of list is most likely to happen, towards the bottom means least likely):
+    </p>
+
+    <div style="max-width: 870px;">
+    <p style="background-color: rgb( 243, 243, 243 ); ">
+    <em>
+    1. Don't get the first screener call.
+    <br/><br/>
+    2. Get a screener call, but I don't pass the technical interview(s).
+    <br/><br/>
+    3. I pass the technical interview(s), but don't get the offer.
+    <br/><br/>
+    4. I get the offer.
+    </em>
+    </p>
+    </div>
+
+
+    <p>
+    Unfortunately I haven't done an in-depth job of measuring the frequencies of these metrics, but 
+    I feel the above is common. And like many, a common frustration of mine is the technical interviews.
+    For me however, the heartbreaking part is that I really love puzzles and these coding problems, but 
+    it makes me uneasy knowing that people use these sorts of problems to filter people and potentially 
+    negatively affecting people's lives.
+    </p>
+
+    <p>
+    And yes, I'm aware of the usual excuses of companies saying that: "We have so many candidates that we
+    need something to filter them.", "a person who passes this interview is more likely to succeed at the
+    company", "if you can't pass the interview, then that means you don't know programming", ... and so on.
+    </p>
+
+    <p>
+    However, the thing is, a fair number of these companies also want you to think that they are solving 
+    "the world's most difficult challenges" or that they are "performing the most innovative breakthroughs in AI".
+    Yet they can't figure out how to hire someone without torturing or hazing them. I just don't buy it.
+    </p>
+
+    <p>
+    And for those reading who got this far and think I'm being vastly unfair or unscientific in my reasoning, you 
+    have to understand that my rambling-argument is playing by the rules these companies set. I don't recall anyone 
+    trying to suggest a serious, properly conducted statistical study trying to deduce what makes a good interview question.
+    Again, their excuses — and I'll address the two most common ones I come across when I've spoken to hiring managers:
+    </p>
+
+    <div style="max-width: 870px;">
+    <p style="background-color: rgb( 243, 243, 243 ); ">
+    <em>
+    1. We can't have a control group and just hire people who failed the interview process to see if they would perform well anyway.
+    <br/><br/>
+
+    2. When we reject someone we can't know if they would have done well at the company if we had instead hired them.
+    </em>
+    </p>
+    </div>
+
+    <p>
+    I'm going to warn you! If you're a Data Scientist and you're making comments like this, you really really failed to meet up to the 
+    "Scientist" part of your role. There are a few things wrong with (1): Firstly, hiring managers need to understand that the process of 
+    getting candidates in the pipeline to hire them is very very expensive (I'm sure they already know this). But you really need to play a
+    game with yourself: If I hired someone who passed the interviews, what are the odds that they are likely to actually be a net-positive 
+    to my company/team/etc.? Also, if in general everyone who passes does well, could you have done better by carefully selecting some of the 
+    population you rejected? Okay, so let's say that you don't think it's worth the monetary risk of hiring someone unqualified and then firing 
+    them because they didn't perform well, and you don't know about statistical designs involving multi-armed bandits. So we don't go with having 
+    a control group, remember, you have access to data. Do you track what happens if you reject someone and then they work at a top company afterwards?
+    Are you still confident in your process? If you know what Bayesian statistics is, then perhaps you can make models and attempt to simulate what 
+    your company's revenue would be like if you changed your hiring process. If you're saying to yourself that "this is hard!", I think you need to 
+    really reevaluate why you even work at this company and why you believe your opinions should dictate whether someone is hired or not.
+    </p>
+
+    <p>
+    Okay for point (2). This one is short: maybe look into empirical Bayesian methods. Also, I'm certain that job boards are more than willing 
+    to give companies API access to track job-seekers (as much as I disagree with this kind of tracking), to see if your deductions on hiring 
+    people or not are correct.
+    </p>
+
+    Okay, now with that out of my system, let's get to the main point of the blog, which is that when hiring we should very very very carefully 
+    design our questions so that when we make a statement such as "if you solve this question this means you know ____" that we are actually 
+    correct about that statement. If you've done these LeetCode-style interviews, I want you to have a crack at one of my hand-crafted coding problems.
+    When attempting to solve it I want you to ask yourself a few questions:
+
+    <div style="max-width: 870px;">
+    <p style="background-color: rgb( 243, 243, 243 ); ">
+    <em>
+    1. Is this a good question?
+    <br/><br/>
+    
+    2. If someone got this question correct, what can we say about this person? For example, do I know what job they applied to? Do I think they've 
+    seen the question before? Does solving this question mean they "know how to program"? If they can't solve this question then what?
+    <br/><br/>
+    </em>
+    </p>
+    </div>
+
+    <div style="max-width: 870px;">
+    <p style="background-color: rgb( 195, 182, 220 ); ">
+    <em>
+
+    Problem: Given a sequence of Heads and Tails, denoted H and T respectively, write an algorithm with O(n) space and time complexity 
+    that determines the average number of flips needed to keep flipping a fair coin until that sequence appears.
+    <br/><br/>
+
+    Example inputs and outputs:
+    <br/><br/>
+
+    The average number of flips until we see H is 2.
+    <br/><br/>
+    The average number of flips until we see HT is 4.
+    <br/><br/>
+    The average number of flips until we see HTHT is 20.
+    <br/><br/>
+    The average number of flips until we see TT is 6.
+    <br/><br/>
+    The average number of flips until we see TH is 4.
+    <br/><br/>
+    </em>
+    </p>
+    </div>
+
+    <p>
+    If you'd like to answer, you can fill the Google form <a style="color:#0000ff" href="https://docs.google.com/forms/d/e/1FAIpQLSdGBb2MB1tA1wKiHL0GO1m9hcWqkAu730W2Pu30fc1y3vlVuw/viewform"> here</a>.
+    So far it's (0% Easy, 40% Medium, 60% Hard).
+    </p>
+
+    To me it's a hard problem, and like with any problem, if you know the trick it's a much easier problem.
+    But in particular I designed this question to be different from what you would encounter on LeetCode. It's
+    an intentionally unfair problem because the only way to get my specified time complexity, you must know that 
+    this problem is related to the <code>ABRACADABRA Theorem</code> or <code>Conway's Leading Number Algorithm</code>.
+
+    <p>
+    Alright, so if you can do this problem does this mean you can program, or does this mean you've seen the trick for this problem?
+    If you can't solve this problem what can I deduce about you? The major issue with this problem is that I can't actually gain any 
+    information about a potential candidate solving this problem other than whether they've seen the trick or they haven't. I posit that problems 
+    like these, while fun in your free time, make for terrible interview experiences. (As an interesting sidenote, I came across a paper
+    that adds to the idea of Mutual Information <a style="color:#0000ff" href="https://arxiv.org/abs/2002.10689"> here</a>. 
+    But to summarize one of its main points: if I have data and I have an 
+    encrypted form of the data, then they possess high mutual information; however, if you don't know this ahead of time and don't have the
+    key, then as a function of the amount of computation you would need to put in in order to discover that the encrypted data is in fact identical,
+    you would likely conclude that there is no mutual information between the data.)
+    </p>
+
+
+    <p>
+    Well ... in actual interviews, it's not like all problems are like this. So maybe those problems are more revealing. However I think 
+    there is something even more subtle to it than that. Coding platforms like LeetCode label the problems <code>Easy</code>, <code>Medium</code>, <code>Hard</code>, however 
+    they don't really disclose how these labels are created. When I started practicing LeetCode, I noticed something a bit unusual: there seem 
+    to be problems that are literally equivalent to each other, yet have different difficulty labels. I'll only focus on one case, but I've seen 
+    this a few times.
+    </p>
+
+
+    <div style="max-width: 870px;">
+    <p style="background-color: rgb( 195, 182, 220 ); ">
+    <em>
+    Suspect Problems (Metrics taken on 05/24/2026)
+
+    <br/><br/>
+    53. Maximum Subarray                 --> (Medium | Accepted 6,143,491/11.5M | Acceptance Rate 53.3%)
+    <br/><br/>
+    121. Best Time to Buy and Sell Stock --> (Easy   | Accepted 8,021,437/14.1M | Acceptance Rate 56.8%)
+    <br/><br/>
+    2321. Maximum Score Of Spliced Array --> (Hard   | Accepted 24,248/41.5K    | Acceptance Rate 58.5%)
+    </em>
+    </p>
+    </div>
+
+ 
+    <p>
+    Disclaimer: I don't know the full details of how these metrics are computed, I have to go off what I'm given. 
+    Now with that said, the first thing that is a bit suspect is that the acceptance rates are not dramatically different for these problems.
+    I don't know what the first standard deviation is, but even if the majority of the distribution is tight around these estimates, say within 
+    5%, this doesn't really let me distinguish the problems all too much in terms of difficulty.
+    </p>
+   
+    <p>
+    Now, I claim these problems are equivalent (especially the first two) and I'll show this in a moment, but I just want to state some ideas about what we are seeing 
+    (some food for thought). Perhaps on a psychological level one problem is harder than another, maybe we have a mislabeling: i.e. the 
+    problems should all be labeled <code>Easy</code>, or they should all be labeled <code>Medium</code>, or they should even all be labeled <code>Hard</code>. We also need 
+    to admit the difficulty of determining problem difficulty because you need a few things from your problem: 1. It needs to provide 
+    a good signal-to-noise ratio in that it actually tells you something informative about the candidate. 2. Difficulty can stem from absence of knowledge.
+    3. If problems are algorithmically equivalent, maybe difficulty depends on psychological factors, and that's tricky to gauge in practice. This of course is a non-exhaustive
+    list of issues, but it's something to keep in mind.
+    </p>
+
+
+    <p>
+    Okay, let's see the equivalence of the problems from the optimization perspective.</br></br>
+
+    <div style="max-width: 870px;">
+    <p style="background-color: rgb( 243, 243, 243 ); ">
+    <em>
+    53. Maximum Sum Subarray</br></br>
+
+    Given an array of integers <code>nums</code>, find the contiguous subarray with maximum
+    sum.
+    <br/><br/>
+    </em>
+    </p>
+    </div>
+
+
+
+
+    A common trick when optimizing over an array (or areas and volumes) that maintain order is to
+    use a cumulative function (i.e. a prefix sum). So for example, if we let \(S_i, S_j\) be
+    prefix sums up to (and including) the i-th and j-th element of nums, notice that if \(i < j\), then
+    the contiguous sum of the subarray is simply \(S_j - S_i\).
+
+
+    So if we denote \(S\) to be the array of cumulative sums of integers —
+    i.e. \(S[3]\) is the sum of the first \(3\) elements
+    of nums — then the sum of any contiguous subarray <code>nums[i:j+1]</code> may be written as
+    \(S[j] - S[i]\). We may view this problem as the following optimization problem:
+
+    $$
+    \max_{0 \leq i < j \leq n} S_j - S_i
+    $$
+
+    Now let's conceptually think about what makes a sum larger or smaller.
+
+    1. If \(i\) is fixed, then we want \(S_j\) to be as large as possible.
+    2. If \(j\) is fixed, then we want \(S_i\) to be as small as possible.
+
+    This is sometimes called <em>separation of variables</em>, (thinking about our calculus days).
+    Imagine we have a multivariable function \(f(i, j) = S_j - S_i\). And we want to find the maximum.
+
+    If we stretch our imagination a little bit, pretend that \(f(i, j)\) is like a two-variable differentiable
+    function. Then in calculus, we compute the gradient \(\nabla_{(i,j)} f(i,j)\), set it to \(0\), and solve for \(i\) and
+    \(j\).
+
+    However, the problem we have here is that:
+
+    1. \(f\) is definitely not differentiable everywhere.
+
+    But we made a powerful observation. We found out that if \(j\) is fixed, then picking \(i\) so that \(S_i\) is as small
+    as possible increases \(f(i,j)\). Likewise, fixing \(i\), then picking \(j\) so that \(S_j\) is as large as possible also
+    increases \(f(i,j)\). Since there is no dependence between \(S_i\) and \(S_j\) as long as we keep one variable fixed, we may
+    re-write the optimization problem as follows:
+
+
+    $$
+    \max_{0 \leq j \leq n} \left(S_j - \min_{0 \leq i < j} S_i\right)
+    $$
+
+
+    Now, let's see why this is equivalent to:
+
+
+    </p>
+
+
+    <p>
+
+    <div style="max-width: 870px;">
+    <p style="background-color: rgb( 243, 243, 243 ); ">
+    <em>
+    121. Best Time to Buy and Sell Stock </br></br>
+
+    You are given an integer array <code>prices</code> where <code>prices[i]</code> is the price 
+    of a given stock on the i-th day.
+
+    Return the maximum profit you can achieve from buying a stock on one day and 
+    then selling it on a different day.
+    <br/><br/>
+    </em>
+    </p>
+    </div>
+
+    Let \(P\) denote the prices array, with the price on the i-th day given by \(P_i\).
+    We are trying to maximize profit, which means buying low and selling high — formally:
+
+    $$
+    \max_{0 \leq i < j \leq n} P_j - P_i
+    $$
+
+    By the same separation-of-variables argument as before, this is identically:
+
+    $$
+    \max_{0 \leq j \leq n} \left(P_j - \min_{0 \leq i < j} P_i\right)
+    $$
+
+    Wait a minute — this is exactly the same formulation as the previous problem, with \(P\) playing the role of \(S\)!
+    But hold on, are these problems only superficially equivalent? In problem 53, \(S\) was a prefix sum of some
+    underlying array, whereas here \(P\) is given to us directly. Does the extra layer of indirection make problem 53 harder?
+    <br/><br/>
+
+    It turns out the equivalence runs even deeper than the optimization formulation. Consider forming a new array \(D\)
+    of day-over-day price differences, where \(D_i = P_i - P_{i-1}\). Then notice that the profit from buying on day \(i\)
+    and selling on day \(j\) is:
+
+    $$
+    P_j - P_i = \sum_{k=i+1}^{j} D_k
+    $$
+
+    In other words, the profit is just the sum of a contiguous subarray of \(D\)! So maximizing profit over all buy/sell
+    pairs is literally the Maximum Subarray problem applied to the differences array \(D\) — and \(D\) plays exactly the role
+    that <code>nums</code> played in problem 53, with \(S\) being its prefix sum. The two problems are not just notationally
+    equivalent at the optimization level; they are structurally identical.
+    </p>
+
+
+
+    <div style="max-width: 870px;">
+    <p style="background-color: rgb( 243, 243, 243 ); ">
+    <em>
+    2321. Maximum Score Of Spliced Array</br></br>
+
+    You are given two integer arrays <code>nums1</code> and <code>nums2</code>, both of length <code>n</code>. You can 
+    choose two integers <code>left</code> and <code>right</code> where <code>0 &lt;= left &lt;= right &lt; n</code> and swap the 
+    subarray <code>nums1[left..right]</code> with the subarray <code>nums2[left..right]</code>. You may choose 
+    to apply the mentioned operation once or not do anything. The score of the arrays 
+    is the maximum of <code>sum(nums1)</code> and <code>sum(nums2)</code>.
+
+    <br/><br/>
+    </em>
+    </p>
+    </div>
+
+
+    <p>
+    Here we go again! Let's denote \(\text{sum}_1 = \sum_{k=0}^{n-1} \text{nums1}[k]\) and
+    \(\text{sum}_2 = \sum_{k=0}^{n-1} \text{nums2}[k]\). After swapping the subarray on indices
+    \([\text{left}, \text{right}]\) from <code>nums2</code> into <code>nums1</code>, the new sum of <code>nums1</code> becomes:
+
+    $$
+    \text{sum}_1 + \sum_{k=\text{left}}^{\text{right}} \left(\text{nums2}[k] - \text{nums1}[k]\right)
+    $$
+
+    Similarly, swapping in the other direction gives the new sum of <code>nums2</code> as:
+
+    $$
+    \text{sum}_2 + \sum_{k=\text{left}}^{\text{right}} \left(\text{nums1}[k] - \text{nums2}[k]\right)
+    $$
+
+    We want to maximize the score, which is the maximum of the two resulting sums. So the problem reduces to:
+
+    $$
+    \max\left(
+        \text{sum}_1 + \max_{\text{left} \leq \text{right}} \sum_{k=\text{left}}^{\text{right}} \left(\text{nums2}[k] - \text{nums1}[k]\right),\quad
+        \text{sum}_2 + \max_{\text{left} \leq \text{right}} \sum_{k=\text{left}}^{\text{right}} \left(\text{nums1}[k] - \text{nums2}[k]\right)
+    \right)
+    $$
+
+    Since \(\text{sum}_1\) and \(\text{sum}_2\) are just constants, this boils down to solving
+    two Maximum Subarray problems: one on the difference array \(D^{(1)} = \text{nums2} - \text{nums1}\),
+    and one on \(D^{(2)} = \text{nums1} - \text{nums2}\). The trick, then, is simply recognizing that you need to construct these
+    two difference arrays and apply the same algorithm from problem 53 to each. You can at least argue that this problem is somewhat different, but 
+    only because the problem creator made the presentation opaque (much like the coin problem).
+    </p>
+
+
+    <p>
+    I didn't provide the optimal \(O(n)\) solution, but note that all these problems can be solved by Kadane's algorithm (originally found by trying 
+    to determine statistical estimators of images interestingly enough, it's unfortunate that none of the problems mention or emphazise this 
+    <a style="color:#0000ff" href="https://en.wikipedia.org/wiki/Maximum_subarray_problem#History"> history</a>).
+    But my point being that the coin problem presented earlier is difficult because you likely didn't see or know about the trick and on top of that I took this trick 
+    and made its presentation mysterious and opaque in the form of a coding problem. Similarly these Maximum Subarray problems can only be solved 
+    efficiently if you are aware of things like Kadane's algorithm followed by being able to see through their obfuscated presentation. In this sense 
+    it's much closer to an encypted puzzle where you need to crack the code with apriori knowledge and being able to pattern match the problem to things
+    you've seen before (also you should really check out the paper <a style="color:#0000ff" href="https://arxiv.org/abs/2002.10689"> here</a>. Or at least have an 
+    AI read my blog and that paper to give you a layman's explanaiton of what's going on and why it's related to what I'm dicussing here).
+    </p>
+
+    <p>
+    My main hope if you dared to get this far in my overly technical and narrowly focused blog post is that if you feel that you are struggling with 
+    LeetCode style problems, please don't blame yourself too much. Yes there is room for improvement and learning. But when the problems are so deeply obfuscated 
+    like this, it's only natural to struggle. But I for those of you that make it and are in a position to change this process for the betterment of everyone,
+    maybe consider reevalutating the entire pipline. It's a big ask, but if even a minute fraction of a percent of people are able to accompolish this, I think 
+    there can be very positive ramifying effects for everyone trying to get a job.
+    </p>
+
+    <p>
+    Thanks for reading my blog!
+    </p>
+
+    <p>
+    - Andrew
+    </p>
+
+
+
+</div>
+<script>hljs.highlightAll();</script>
+</body>
